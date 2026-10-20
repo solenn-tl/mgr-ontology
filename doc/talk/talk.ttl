@@ -1,0 +1,231 @@
+@prefix cet: <http://data.mgr.fr/id/codes/contexteventtype/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix mgr: <http://data.mgr.fr/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tt: <http://data.mgr.fr/id/codes/talktype/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+
+# ==========================================
+# Classes
+# ==========================================
+mgr:Talk a owl:Class ;
+    rdfs:label "Talk"@en, "Conférence"@fr ;
+    rdfs:comment "An individual talk, lecture, forum, or roundtable presentation."@en ;
+    rdfs:subClassOf schema:ConferenceEvent .
+
+mgr:TalkSet a owl:Class ;
+    rdfs:label "Talk set"@en, "Ensemble de conférences"@fr ;
+    rdfs:comment "A set of talks, lectures, forums, or roundtable presentations linked by a common theme or purpose."@en ;
+    rdfs:subClassOf schema:EventSeries .
+
+mgr:TalkType a owl:Class ;
+    rdfs:label "Talk type"@en, "Type de conférence"@fr ;
+    rdfs:comment "Class of concepts representing types of talks like lecture, forum, or roundtable presentation."@en;
+    rdfs:subClassOf skos:Concept .
+
+mgr:ContextEvent a owl:Class ;
+    rdfs:label "Context event"@en, "Événement contextuel"@fr ;
+    rdfs:comment "An event that provides context for a talk or talk set, such as a festival, exhibition, or cultural season."@en ;
+    rdfs:subClassOf schema:Event .
+
+mgr:ContextEventType a owl:Class ;
+    rdfs:label "Context event type"@en, "Type d'événement contextuel"@fr ;
+    rdfs:comment "Class of concepts representing types of context events like festival, exhibition, or cultural season."@en;
+    rdfs:subClassOf skos:Concept .
+
+# ==========================================
+# Object Properties
+# ==========================================
+mgr:isOrganizedInContextOf a owl:ObjectProperty ;
+    rdfs:label "is organized in context of"@en, "est organisé dans le contexte de"@fr ;
+    rdfs:comment "Relates a talk or talk set to a context event that provides additional context for the event."@en; 
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet) ] ;
+    rdfs:range mgr:ContextEvent .
+
+mgr:isOrganizedBy a owl:ObjectProperty ;
+    rdfs:label "is organized by"@en, "est organisé par"@fr ;
+    rdfs:comment "Relates a talk or talk set to the organization responsible for organizing the event."@en; 
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet) ] ;
+    rdfs:range owl:Thing .
+
+mgr:takesPlaceAt a owl:ObjectProperty ;
+    rdfs:label "takes place at"@en, "a lieu à"@fr ;
+    rdfs:comment "Relates a talk or talk set to the location where the event takes place."@en; 
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent) ] ;
+    rdfs:range schema:Place .
+
+mgr:isPartOfTalkSet a owl:ObjectProperty ;
+    rdfs:label "fait partie du cycle"@fr, "is part of talk set"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range mgr:TalkSet ;
+    rdfs:subPropertyOf schema:superEvent, dcterms:isPartOf .
+
+mgr:hasEventType a owl:ObjectProperty ;
+    rdfs:label "type d'événement contextuel"@fr, "event type"@en ;
+    rdfs:domain mgr:ContextEvent ;
+    rdfs:range mgr:ContextEventType ;
+    rdfs:subPropertyOf dcterms:type .
+
+mgr:hasTalkType a owl:ObjectProperty ;
+    rdfs:label "type de conférence"@fr, "talk type"@en ;
+    rdfs:domain mgr:Talk, mgr:TalkSet ;
+    rdfs:range mgr:TalkType ;
+    rdfs:subPropertyOf dcterms:type .
+
+mgr:hasTime a owl:ObjectProperty ;
+    rdfs:label "a pour temps"@fr, "has time"@en ;
+    rdfs:comment "Relates a talk, talk set, or context event to a temporal entity (instant or interval)."@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent) ] ;
+    rdfs:range time:TemporalEntity ;
+    rdfs:subPropertyOf time:hasTime .
+    
+mgr:isSpeakerOf a owl:ObjectProperty ;
+    rdfs:label "est conférencier dans"@fr, "is speaker in"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk .
+
+mgr:hasSpeaker a owl:ObjectProperty ;
+    rdfs:label "a pour conférencier"@fr, "has speaker"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf schema:performer .
+
+mgr:hasModerator a owl:ObjectProperty ;
+    rdfs:label "a pour modérateur"@fr, "has moderator"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf mgr:hasSpeaker .
+
+mgr:hasGuestSpeaker a owl:ObjectProperty ;
+    rdfs:label "a pour conférencier invité"@fr, "has guest speaker"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf mgr:hasSpeaker .
+
+mgr:hasAudienceMember a owl:ObjectProperty ;
+    rdfs:label "a pour membre du public"@fr, "has audience member"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf mgr:hasSpeaker .
+
+mgr:isSpeakerOf a owl:ObjectProperty ;
+    rdfs:label "est conférencier dans"@fr, "is speaker in"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    owl:inverseOf mgr:hasSpeaker .
+
+mgr:isModeratorOf a owl:ObjectProperty ;
+    rdfs:label "est modérateur de"@fr, "is moderator of"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf mgr:isSpeakerOf ;
+    owl:inverseOf mgr:hasModerator .
+
+mgr:isGuestSpeakerOf a owl:ObjectProperty ;
+    rdfs:label "est conférencier invité de"@fr, "is guest speaker of"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf mgr:isSpeakerOf ;
+    owl:inverseOf mgr:hasGuestSpeaker .
+
+mgr:isAudienceMemberOf a owl:ObjectProperty ;
+    rdfs:label "est membre du public de"@fr, "is audience member of"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf mgr:isSpeakerOf ;
+    owl:inverseOf mgr:hasAudienceMember .
+
+mgr:hasContributor a owl:ObjectProperty ;
+    rdfs:label "a pour contributeur"@fr, "has contributor"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf schema:contributor .
+
+mgr:includesWork a owl:ObjectProperty ;
+    rdfs:label "inclut l'œuvre"@fr, "includes work"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:CreativeWork ;
+    rdfs:subPropertyOf schema:workFeatured .
+
+mgr:hasTopic a owl:ObjectProperty ;
+    rdfs:label "a pour sujet"@fr, "has topic"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range skos:Concept.
+
+# ==========================================
+# Data Properties
+# ==========================================
+mgr:syracuseId a owl:DatatypeProperty ;
+    rdfs:label "identifiant Syracuse"@fr, "Syracuse ID"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:Person) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier .
+
+mgr:documentId a owl:DatatypeProperty ;
+    rdfs:label "identifiant documentId"@fr, "documentId"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:Person) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier .
+
+mgr:title a owl:DatatypeProperty ;
+    rdfs:label "titre"@fr, "title"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:CreativeWork) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:title .
+
+mgr:subtitle a owl:DatatypeProperty ;
+    rdfs:label "sous-titre"@fr, "subtitle"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:CreativeWork) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:title .
+
+mgr:summary a owl:DatatypeProperty ;
+    rdfs:label "résumé"@fr, "summary"@en ;
+    skos:altLabel "abstract"@en, "description"@fr ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:CreativeWork) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:description .
+
+mgr:padURL a owl:DatatypeProperty ;
+    rdfs:label "URL on pad.philharmoniedeparis.fr"@fr, "URL on pad.philharmoniedeparis.fr"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent) ] ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf schema:url, rdfs:seeAlso .
+
+# ==========================================
+# SKOS Concepts Schemes
+# ==========================================
+tt:talkTypeScheme a skos:ConceptScheme ;
+    skos:prefLabel "Taxonomie des types de conférences"@fr, "Talk Types Taxonomy"@en .
+
+cet:contextEventTypeScheme a skos:ConceptScheme ;
+    skos:prefLabel "Taxonomie des types d'événements contextuels"@fr, "Context Event Types Taxonomy"@en .
+
+# ==========================================
+# Individual SKOS Concepts
+# ==========================================
+
+# tt:talkTypeScheme Individual Concepts (instances of mgr:TalkType)
+tt:panel a mgr:TalkType ;
+    skos:inScheme tt:talkTypeScheme ;
+    skos:prefLabel "Table ronde"@fr, "Panel discussion"@en ;
+    skos:definition "Discussion structurée entre plusieurs spécialistes sur un sujet donné."@fr .
+
+tt:keynote a mgr:TalkType ;
+    skos:inScheme tt:talkTypeScheme ;
+    skos:prefLabel "Conférence inaugurale"@fr, "Keynote"@en ;
+    skos:definition "Conférence d'un seul spécialiste invité."@fr .
+
+# cet:contextEventTypeScheme Individual Concepts (instances of mgr:ContextEvent)
+cet:exhibition a mgr:ContextEventType ;
+    skos:inScheme cet:contextEventTypeScheme ;
+    skos:prefLabel "Exposition"@fr, "Exhibition"@en .
+
+cet:culturalSeason a mgr:ContextEventType ;
+    skos:inScheme cet:contextEventTypeScheme ;
+    skos:prefLabel "Saison culturelle"@fr, "Cultural season"@en .

@@ -14,6 +14,8 @@ A recording is associated with an ```Event``` which is a conference/talk.
 The recording may have 1..n subparts (chapters, tracks). 
 It can have derived versions (audio only of a video, transcript of an audio/video, etc.).
 
+may be splitted in several parts (```TalkPart```) (multiple chapters and excerpts, with or without titles) and 
+
 ### Competency question
 * What is the type of the initial recording of talk X ?
 >>> Audio
