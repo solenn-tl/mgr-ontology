@@ -1,0 +1,13 @@
+kgenv/
+**/__pycache__/**
+**/.ipynb_checkpoints/**
+docseg/
+data/
+.vscode
+outputs/
+resources/
+scripts/
+.env
+NOTES.md
+old-README.md
+ontology/
