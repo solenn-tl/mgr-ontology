@@ -1,10 +1,10 @@
 @prefix : <https://w3id.org/mgr#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix cc: <http://creativecommons.org/ns#> .
-@prefix cet: <http://data.mgr.fr/id/codes/contexteventtype/> .
+@prefix cet: <https://w3id.org/mgr/id/codes/contexteventtype/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix mgr: <http://data.mgr.fr/ontology/> .
+@prefix mgr: <https://w3id.org/mgr#> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix organization: <http://www.w3.org/ns/org#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -14,8 +14,8 @@
 @prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix time: <http://www.w3.org/2006/time#> .
-@prefix tpt: <http://data.mgr.fr/id/codes/talkparttype/> .
-@prefix tt: <http://data.mgr.fr/id/codes/talktype/> .
+@prefix tpt: <https://w3id.org/mgr/id/codes/talkparttype/> .
+@prefix tt: <https://w3id.org/mgr/id/codes/talktype/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix widoco: <https://w3id.org/widoco/vocab#> .
@@ -70,8 +70,8 @@
         foaf:name "Rodolphe Bailly" ;
         foaf:familyName "Bailly" ;
         foaf:firstName "Rodolphe" ;
-        #foaf:mbox <mailto:> ;
-        #foaf:homepage <> ;
+        foaf:mbox <mailto:rbailly@cite-musique.fr> ;
+        foaf:homepage <https://pro.europeana.eu/person/rodolphe-bailly> ;
         schema:affiliation [
             a schema:Organization ;
             schema:name "Philharmonie de Paris - Cité de la Musique" ]
@@ -79,7 +79,7 @@
         foaf:name "Cassia Trojahn" ;
         foaf:familyName "Trojahn" ;
         foaf:firstName "Cassia" ;
-        #foaf:mbox <mailto:cassia.trojahn@epita.fr>;
+        foaf:mbox <mailto:cassia.trojahn-dos-santos@univ-grenoble-alpes.fr> ;
         foaf:homepage <https://www.irit.fr/~Cassia.Trojahn/> ;
         schema:affiliation [
             a schema:Organization ;
@@ -89,13 +89,8 @@
     # --- Éditeur (publisher / publisherURI / publisherInstitution) ---
     dcterms:publisher [
         a schema:Organization ;
-        schema:name "MOEX" ;
+        schema:name "Inria" ;
         schema:url <https://moex.inria.fr/> ;
-        schema:parentOrganization [
-            a schema:Organization ;
-            schema:name "IGN" ;
-            schema:url <https://www.umr-lastig.fr/>
-        ] ;
     ] ;
     # --- Version (ontologyRevisionNumber) ---
     dcterms:issued "2026-10-13"^^xsd:date ;
