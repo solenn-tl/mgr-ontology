@@ -10,4 +10,5 @@ scripts/
 .env
 NOTES.md
 old-README.md
-ontology/
+talk/talk.ttl
+recording/recording.ttl

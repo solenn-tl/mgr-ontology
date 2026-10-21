@@ -7,6 +7,7 @@
 @prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix tt: <http://data.mgr.fr/id/codes/talktype/> .
+@prefix tpt: <http://data.mgr.fr/id/codes/talkparttype/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 
@@ -17,6 +18,11 @@ mgr:Talk a owl:Class ;
     rdfs:label "Talk"@en, "Conférence"@fr ;
     rdfs:comment "An individual talk, lecture, forum, or roundtable presentation."@en ;
     rdfs:subClassOf schema:ConferenceEvent .
+
+mgr:TalkPart a owl:Class ;
+    rdfs:label "Talk part"@en, "Partie de conférence"@fr ;
+    rdfs:comment "A segment of a talk defined by coherence logic such as a speaker turn or topic consistency."@en ;
+    rdfs:subClassOf schema:Event .
 
 mgr:TalkSet a owl:Class ;
     rdfs:label "Talk set"@en, "Ensemble de conférences"@fr ;
@@ -59,6 +65,13 @@ mgr:takesPlaceAt a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent) ] ;
     rdfs:range schema:Place .
 
+mgr:isPartOfTalk a owl:ObjectProperty ;
+    rdfs:label "fait partie de la conférence"@fr, "is part of talk"@en ;
+    rdfs:comment "Relates a talk part to its parent talk."@en ;
+    rdfs:domain mgr:TalkPart ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf schema:superEvent, dcterms:isPartOf .
+
 mgr:isPartOfTalkSet a owl:ObjectProperty ;
     rdfs:label "fait partie du cycle"@fr, "is part of talk set"@en ;
     rdfs:domain mgr:Talk ;
@@ -77,13 +90,26 @@ mgr:hasTalkType a owl:ObjectProperty ;
     rdfs:range mgr:TalkType ;
     rdfs:subPropertyOf dcterms:type .
 
+mgr:hasTalkPartType a owl:ObjectProperty ;
+    rdfs:label "type de partie de conférence"@fr, "talk part type"@en ;
+    rdfs:domain mgr:TalkPart ;
+    rdfs:range mgr:TalkPartType ;
+    rdfs:subPropertyOf dcterms:type .
+
 mgr:hasTime a owl:ObjectProperty ;
     rdfs:label "a pour temps"@fr, "has time"@en ;
-    rdfs:comment "Relates a talk, talk set, or context event to a temporal entity (instant or interval)."@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent) ] ;
+    rdfs:comment "Relates a thing to a temporal entity (instant or interval)."@en ;
+    rdfs:domain owl:Thing ;
     rdfs:range time:TemporalEntity ;
     rdfs:subPropertyOf time:hasTime .
     
+mgr:hasTimeInterval a owl:ObjectProperty ;
+    rdfs:label "has time span"@en, "a pour intervalle de temps"@fr ;
+    rdfs:comment "Relates a thing to a temporal interval representing its start and end time."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range time:Interval ;
+    rdfs:subPropertyOf time:hasTime .
+
 mgr:isSpeakerOf a owl:ObjectProperty ;
     rdfs:label "est conférencier dans"@fr, "is speaker in"@en ;
     rdfs:domain schema:Person ;
@@ -162,38 +188,38 @@ mgr:hasTopic a owl:ObjectProperty ;
 # ==========================================
 mgr:syracuseId a owl:DatatypeProperty ;
     rdfs:label "identifiant Syracuse"@fr, "Syracuse ID"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:Person) ] ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:TalkPart mgr:Recording mgr:RecordingPart mgr:ContextEvent schema:Person) ] ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:identifier .
 
 mgr:documentId a owl:DatatypeProperty ;
     rdfs:label "identifiant documentId"@fr, "documentId"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:Person) ] ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:TalkPart mgr:Recording mgr:RecordingPart mgr:ContextEvent schema:Person) ] ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:identifier .
 
 mgr:title a owl:DatatypeProperty ;
     rdfs:label "titre"@fr, "title"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:CreativeWork) ] ;
+    rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:title .
 
 mgr:subtitle a owl:DatatypeProperty ;
     rdfs:label "sous-titre"@fr, "subtitle"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:CreativeWork) ] ;
+    rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:title .
 
 mgr:summary a owl:DatatypeProperty ;
     rdfs:label "résumé"@fr, "summary"@en ;
     skos:altLabel "abstract"@en, "description"@fr ;
-    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent schema:CreativeWork) ] ;
+    rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:description .
 
 mgr:padURL a owl:DatatypeProperty ;
     rdfs:label "URL on pad.philharmoniedeparis.fr"@fr, "URL on pad.philharmoniedeparis.fr"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent) ] ;
+    rdfs:domain owl:Thing ;
     rdfs:range xsd:anyURI ;
     rdfs:subPropertyOf schema:url, rdfs:seeAlso .
 
@@ -206,6 +232,9 @@ tt:talkTypeScheme a skos:ConceptScheme ;
 cet:contextEventTypeScheme a skos:ConceptScheme ;
     skos:prefLabel "Taxonomie des types d'événements contextuels"@fr, "Context Event Types Taxonomy"@en .
 
+tpt:talkPartTypeScheme a skos:ConceptScheme ;
+    skos:prefLabel "Taxonomie des types de parties de conférences"@fr, "Talk Part Types Taxonomy"@en .
+
 # ==========================================
 # Individual SKOS Concepts
 # ==========================================
@@ -214,11 +243,11 @@ cet:contextEventTypeScheme a skos:ConceptScheme ;
 tt:panel a mgr:TalkType ;
     skos:inScheme tt:talkTypeScheme ;
     skos:prefLabel "Table ronde"@fr, "Panel discussion"@en ;
-    skos:definition "Discussion structurée entre plusieurs spécialistes sur un sujet donné."@fr .
+    skos:definition "Discussion structurée entre plusieurs spécialistes sur un sujet donné, souvent en présence d'un modérateur."@fr .
 
 tt:keynote a mgr:TalkType ;
     skos:inScheme tt:talkTypeScheme ;
-    skos:prefLabel "Conférence inaugurale"@fr, "Keynote"@en ;
+    skos:prefLabel "Keynote"@fr, "Keynote"@en ;
     skos:definition "Conférence d'un seul spécialiste invité."@fr .
 
 # cet:contextEventTypeScheme Individual Concepts (instances of mgr:ContextEvent)
@@ -229,3 +258,20 @@ cet:exhibition a mgr:ContextEventType ;
 cet:culturalSeason a mgr:ContextEventType ;
     skos:inScheme cet:contextEventTypeScheme ;
     skos:prefLabel "Saison culturelle"@fr, "Cultural season"@en .
+
+# tt:talkPartTypeScheme Individual Concepts (instances of mgr:TalkPartType)
+tpt:speakerTurn a mgr:TalkPartType ;
+    skos:inScheme tpt:talkPartTypeScheme ;
+    skos:prefLabel "Tour de parole"@fr, "Speaker turn"@en ;
+    skos:definition "Segment d'une conférence correspondant à la prise de parole d'un intervenant."@fr .
+
+tpt:chapter a mgr:TalkPartType ;
+    skos:inScheme tpt:talkPartTypeScheme ;
+    skos:prefLabel "Chapitre"@fr, "Chapter"@en ;
+    skos:definition "Segment généralement long d'une conférence correspondant à un sujet ou de thème."@fr .
+
+tpt:librarianChapter a mgr:TalkPartType ;
+    skos:inScheme tpt:talkPartTypeScheme ;
+    skos:narrower tpt:chapter ;
+    skos:prefLabel "Chapitre défini par un bibliothécaire"@fr, "Librarian chapter"@en ;
+    skos:definition "Segment généralement long d'une conférence correspondant à un sujet ou de thème défini par un catalogueur."@fr .

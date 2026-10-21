@@ -1,4 +1,4 @@
-# Talk modules: schema and RDF tests
+# Talk modules: schema and RDF guidelines
 
 ## Schema
 ```mermaid

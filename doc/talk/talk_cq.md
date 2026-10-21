@@ -26,3 +26,8 @@
 **In which talks did a specific person participate as ```{{a certain speaker role}}```?**
 * Example: 
 * Answer:  
+
+## CQ5
+**What is the thematic progression of Talk Y broken down by its structural TalkPart segments?**
+* Example: 
+* Answer:  

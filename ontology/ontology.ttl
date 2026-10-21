@@ -1,0 +1,511 @@
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix cet: <http://data.mgr.fr/id/codes/contexteventtype/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mgr: <http://data.mgr.fr/ontology/> .
+@prefix organization: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tt: <http://data.mgr.fr/id/codes/talktype/> .
+@prefix tpt: <http://data.mgr.fr/id/codes/talkparttype/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix widoco: <https://w3id.org/widoco/vocab#> .
+
+# ---- Ontology metadata ----
+<https://w3id.org/mgr#> a owl:Ontology, voaf:Vocabulary ;
+    # --- Titre (ontologyTitle) ---
+    dcterms:title
+        "Ontologie Music Graph RAG"@fr ,
+        "Music Graph RAG ontology"@en ;
+    # --- Nom court (ontologyName) ---
+    rdfs:label
+        "Music Graph RAG"@fr ,
+        "Music Graph RAG"@en ;
+    # --- Namespace (ontologyPrefix, ontologyNamespaceURI) ---
+    vann:preferredNamespacePrefix "mgr" ;
+    vann:preferredNamespaceUri <https://w3id.org/mgr#> ;
+    dcterms:description "Ontologie pour décrire les conférences et les enregistrements musicaux conservés par la Philharmonie de Paris - Cité de la Musique et les connaissances qu'elles contiennent."@fr, 
+                        "Ontology to describe the conferences and musical recordings preserved by the Philharmonie de Paris - Cité de la Musique and the knowledge they contain."@en;
+    # --- Authors / authorsURI / authorsInstitution ---
+    dcterms:creator [ a foaf:Person ;
+        foaf:name "Solenn Tual" ;
+        foaf:familyName "Tual" ;
+        foaf:firstName "Solenn" ;
+        foaf:mbox <mailto:solenn.tual@inria.fr> ;
+        foaf:homepage <https://www.solenn-tl.github.io/> ;
+        schema:identifier <https://www.wikidata.org/wiki/Q122457645> ;
+        schema:affiliation [
+            a schema:Organization ;
+            schema:name "Univ. Grenoble Alpes, Inria, CNRS, Grenoble INP, LIG, F-38000 Grenoble, France" ;
+            schema:url <https://moex.inria.fr/>
+        ] ;
+        organization:hasMembership [
+            a organization:Membership ;
+            organization:memberDuring [
+                a time:Interval ;
+                time:hasBeginning [
+                    a time:Instant ;
+                    time:inXSDDateTimeStamp "2026-05-01"^^xsd:dateTimeStamp ;
+                ] ;
+            ] ;
+            organization:organization <https://moex.inria.fr/> ;
+            organization:role [
+                a organization:Role ;
+                rdfs:label "Postdoctorante"@fr ,
+                        "Postdoctoral fellow"@en ;
+                ] ;
+            ] ;
+        ];
+    dcterms:contributor [ a foaf:Person ;
+        foaf:name "Rodolphe Bailly" ;
+        foaf:familyName "Bailly" ;
+        foaf:firstName "Rodolphe" ;
+        #foaf:mbox <mailto:> ;
+        #foaf:homepage <> ;
+        schema:affiliation [
+            a schema:Organization ;
+            schema:name "Philharmonie de Paris - Cité de la Musique" ]
+    ] , [ a foaf:Person ;
+        foaf:name "Cassia Trojahn" ;
+        foaf:familyName "Trojahn" ;
+        foaf:firstName "Cassia" ;
+        #foaf:mbox <mailto:cassia.trojahn@epita.fr>;
+        foaf:homepage <https://www.irit.fr/~Cassia.Trojahn/> ;
+        schema:affiliation [
+            a schema:Organization ;
+            schema:name "Univ. Grenoble Alpes, Inria, CNRS, Grenoble INP, LIG, F-38000 Grenoble, France" ;
+            schema:url <https://moex.inria.fr/>]
+    ] ;
+    # --- Éditeur (publisher / publisherURI / publisherInstitution) ---
+    dcterms:publisher [
+        a schema:Organization ;
+        schema:name "MOEX" ;
+        schema:url <https://moex.inria.fr/> ;
+        schema:parentOrganization [
+            a schema:Organization ;
+            schema:name "IGN" ;
+            schema:url <https://www.umr-lastig.fr/>
+        ] ;
+    ] ;
+    # --- Version (ontologyRevisionNumber) ---
+    dcterms:issued "2026-10-13"^^xsd:date ;
+    owl:versionInfo "0.0.1" ;
+    # --- Licences and Rights ---
+    dcterms:rights "Copyright 2026, Inria, Philharmonie de Paris - Cité de la Musique" ;
+    dcterms:license <http://www.data.gouv.fr/Licence-Ouverte-1.0> ;
+    cc:license <http://www.data.gouv.fr/Licence-Ouverte-Open-Licence> ;
+    dcterms:license <http://creativecommons.org/licenses/by/2.0/> ;
+    cc:license <http://creativecommons.org/licenses/by/2.0/> ;
+    dcterms:license <http://creativecommons.org/licenses/by/> ;
+    cc:license <http://opendatacommons.org/licenses/by/> ;
+    # --- Financement (funding) ---
+    schema:fundedItem [
+        a schema:Grant ;
+        schema:sponsor [
+            a schema:Organization ;
+            schema:name "Philharmonie de Paris - Cité de la Musique" ;
+            #schema:url <https://www.ign.fr/>
+        ]
+    ], [
+        a schema:Grant ;
+        schema:sponsor [
+            a schema:Organization ;
+            schema:name "Ministère de la Culture" ;
+            #schema:url <https://www.defense.gouv.fr/aid>
+        ]
+    ] ;
+    schema:funding "Philharmonie de Paris - Cité de la Musique"@en, "Ministère de la Culture"@fr.
+    # --- Citation bibliographique (citeAs), DOI, Source ---
+    #dcterms:bibliographicCitation "Bernard, C., Tual, S., Abadie, N., Duménieu, B., Chazalon, J., Perret, J. (2025). PeGazUs: A Knowledge Graph Based Approach to Build Urban Perpetual Gazetteers. In: Alam, M., Rospocher, M., van Erp, M., Hollink, L., Gesese, G.A. (eds) Knowledge Engineering and Knowledge Management. EKAW 2024. Lecture Notes in Computer Science(), vol 15370. Springer, Cham. https://doi.org/10.1007/978-3-031-77792-9_22" ;
+    #bibo:doi "10.1007/978-3-031-77792-9_22" ;
+    #dcterms:source <https://doi.org/10.1007/978-3-031-77792-9_22> ;
+    #schema:codeRepository <https://github.com/solenn-tl/tabulae-ontology> ;
+    #dcterms:abstract ""@fr, ""@en ;
+    #widoco:introduction ""@fr , ""@en ;
+    #widoco:introduction
+    #"Un texte bref à ajouter dans l'introduction."@fr ,
+    #"A brief text for the introduction section may be written here."@en ;
+    #rdfs:seeAlso <>.
+
+# ---- Annotation properties ----
+owl:deprecated a owl:AnnotationProperty ;
+    rdfs:isDefinedBy owl: .
+skos:definition a owl:AnnotationProperty ;
+    rdfs:isDefinedBy skos: .
+skos:inScheme a owl:AnnotationProperty ;
+    rdfs:isDefinedBy skos: .
+skos:prefLabel a owl:AnnotationProperty ;
+    rdfs:isDefinedBy skos: .
+skos:altLabel a owl:AnnotationProperty ;
+    rdfs:isDefinedBy skos: .
+skos:broader a owl:ObjectProperty ;
+    rdfs:isDefinedBy skos: ;
+    owl:inverseOf skos:narrower .
+skos:narrower a owl:ObjectProperty ;
+    rdfs:isDefinedBy skos: ;
+    owl:inverseOf skos:broader .
+skos:closeMatch a owl:ObjectProperty ;
+    rdfs:isDefinedBy skos:.
+skos:exactMatch a owl:ObjectProperty ;
+    rdfs:isDefinedBy skos:.
+skos:related a owl:ObjectProperty ;
+    rdfs:isDefinedBy skos:.
+rdfs:seeAlso a owl:AnnotationProperty ;
+    rdfs:isDefinedBy rdfs: .
+
+# ==========================================
+# Classes
+# ==========================================
+mgr:Talk a owl:Class ;
+    rdfs:label "Talk"@en, "Conférence"@fr ;
+    rdfs:comment "An individual talk, lecture, forum, or roundtable presentation."@en ;
+    rdfs:subClassOf schema:ConferenceEvent .
+
+mgr:TalkPart a owl:Class ;
+    rdfs:label "Talk part"@en, "Partie de conférence"@fr ;
+    rdfs:comment "A segment of a talk defined by coherence logic such as a speaker turn or topic consistency."@en ;
+    rdfs:subClassOf schema:Event .
+
+mgr:TalkSet a owl:Class ;
+    rdfs:label "Talk set"@en, "Ensemble de conférences"@fr ;
+    rdfs:comment "A set of talks, lectures, forums, or roundtable presentations linked by a common theme or purpose."@en ;
+    rdfs:subClassOf schema:EventSeries .
+
+mgr:TalkType a owl:Class ;
+    rdfs:label "Talk type"@en, "Type de conférence"@fr ;
+    rdfs:comment "Class of concepts representing types of talks like lecture, forum, or roundtable presentation."@en;
+    rdfs:subClassOf skos:Concept .
+
+mgr:ContextEvent a owl:Class ;
+    rdfs:label "Context event"@en, "Événement contextuel"@fr ;
+    rdfs:comment "An event that provides context for a talk or talk set, such as a festival, exhibition, or cultural season."@en ;
+    rdfs:subClassOf schema:Event .
+
+mgr:ContextEventType a owl:Class ;
+    rdfs:label "Context event type"@en, "Type d'événement contextuel"@fr ;
+    rdfs:comment "Class of concepts representing types of context events like festival, exhibition, or cultural season."@en;
+    rdfs:subClassOf skos:Concept .
+
+mgr:Recording a rdfs:Class ;
+    rdfs:label "Recording"@en, "Enregistrement"@fr ;
+    rdfs:comment "A video or audio realization that fixes a record of a talk or event."@en ;
+    rdfs:subClassOf schema:MediaObject .
+
+mgr:RecordingPart a rdfs:Class ;
+    rdfs:label "Recording Part"@en, "Partie d'enregistrement"@fr ;
+    rdfs:comment "A segment or excerpt of a top-level recording."@en ;
+    rdfs:subClassOf schema:MediaObject .
+
+# ==========================================
+# Object Properties
+# ==========================================
+mgr:isOrganizedInContextOf a owl:ObjectProperty ;
+    rdfs:label "is organized in context of"@en, "est organisé dans le contexte de"@fr ;
+    rdfs:comment "Relates a talk or talk set to a context event that provides additional context for the event."@en; 
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet) ] ;
+    rdfs:range mgr:ContextEvent .
+
+mgr:isOrganizedBy a owl:ObjectProperty ;
+    rdfs:label "is organized by"@en, "est organisé par"@fr ;
+    rdfs:comment "Relates a talk or talk set to the organization responsible for organizing the event."@en; 
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet) ] ;
+    rdfs:range owl:Thing .
+
+mgr:takesPlaceAt a owl:ObjectProperty ;
+    rdfs:label "takes place at"@en, "a lieu à"@fr ;
+    rdfs:comment "Relates a talk or talk set to the location where the event takes place."@en; 
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent) ] ;
+    rdfs:range schema:Place .
+
+mgr:isPartOfTalk a owl:ObjectProperty ;
+    rdfs:label "fait partie de la conférence"@fr, "is part of talk"@en ;
+    rdfs:comment "Relates a talk part to its parent talk."@en ;
+    rdfs:domain mgr:TalkPart ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf schema:superEvent, dcterms:isPartOf .
+
+mgr:isPartOfTalkSet a owl:ObjectProperty ;
+    rdfs:label "fait partie du cycle"@fr, "is part of talk set"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range mgr:TalkSet ;
+    rdfs:subPropertyOf schema:superEvent, dcterms:isPartOf .
+
+mgr:hasEventType a owl:ObjectProperty ;
+    rdfs:label "type d'événement contextuel"@fr, "event type"@en ;
+    rdfs:domain mgr:ContextEvent ;
+    rdfs:range mgr:ContextEventType ;
+    rdfs:subPropertyOf dcterms:type .
+
+mgr:hasTalkType a owl:ObjectProperty ;
+    rdfs:label "type de conférence"@fr, "talk type"@en ;
+    rdfs:domain mgr:Talk, mgr:TalkSet ;
+    rdfs:range mgr:TalkType ;
+    rdfs:subPropertyOf dcterms:type .
+
+mgr:hasTalkPartType a owl:ObjectProperty ;
+    rdfs:label "type de partie de conférence"@fr, "talk part type"@en ;
+    rdfs:domain mgr:TalkPart ;
+    rdfs:range mgr:TalkPartType ;
+    rdfs:subPropertyOf dcterms:type .
+
+mgr:isRecordingOf a owl:ObjectProperty ;
+    rdfs:label "is recording of"@en, "est l'enregistrement de"@fr ;
+    rdfs:comment "Relates a recording to the talk it captures."@en ;
+    rdfs:domain mgr:Recording ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf schema:about .
+
+mgr:hasRecordingPart a owl:ObjectProperty ;
+    rdfs:label "has recording part"@en, "a pour partie d'enregistrement"@fr ;
+    rdfs:comment "Relates a top-level recording to one of its segments or parts."@en ;
+    rdfs:domain mgr:Recording ;
+    rdfs:range mgr:RecordingPart ;
+    rdfs:subPropertyOf schema:hasPart, dcterms:hasPart .
+
+mgr:isPartOfRecording a owl:ObjectProperty ;
+    rdfs:label "is part of recording"@en, "fait partie de l'enregistrement"@fr ;
+    rdfs:comment "Relates a recording part to its parent top-level recording."@en ;
+    rdfs:domain mgr:RecordingPart ;
+    rdfs:range mgr:Recording ;
+    rdfs:subPropertyOf schema:isPartOf, dcterms:isPartOf .
+
+mgr:depictsTalkPart a owl:ObjectProperty ;
+    rdfs:label "depicts talk part"@en, "illustre la partie de conférence"@fr ;
+    rdfs:comment "Connects a recording part to the intellectual discourse segment (TalkPart) it captures."@en ;
+    rdfs:domain mgr:RecordingPart ;
+    rdfs:range mgr:TalkPart .
+
+mgr:hasDirector a owl:ObjectProperty ;
+    rdfs:label "has director"@en, "a pour réalisateur"@fr ;
+    rdfs:comment "Relates a recording to the person in charge of recording and/or editing."@en ;
+    rdfs:domain mgr:Recording ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf schema:director.
+
+mgr:isDirectorOf a owl:ObjectProperty ;
+    rdfs:label "is director of"@en, "est le réalisateur de"@fr ;
+    rdfs:comment "Relates a person to the recording they directed."@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Recording ;
+    rdfs:subPropertyOf schema:director .
+
+mgr:hasTime a owl:ObjectProperty ;
+    rdfs:label "a pour temps"@fr, "has time"@en ;
+    rdfs:comment "Relates a thing to a temporal entity (instant or interval)."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range time:TemporalEntity ;
+    rdfs:subPropertyOf time:hasTime .
+    
+mgr:hasTimeInterval a owl:ObjectProperty ;
+    rdfs:label "has time span"@en, "a pour intervalle de temps"@fr ;
+    rdfs:comment "Relates a thing to a temporal interval representing its start and end time."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range time:Interval ;
+    rdfs:subPropertyOf time:hasTime .
+
+mgr:isSpeakerOf a owl:ObjectProperty ;
+    rdfs:label "est conférencier dans"@fr, "is speaker in"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk .
+
+mgr:hasSpeaker a owl:ObjectProperty ;
+    rdfs:label "a pour conférencier"@fr, "has speaker"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf schema:performer .
+
+mgr:hasModerator a owl:ObjectProperty ;
+    rdfs:label "a pour modérateur"@fr, "has moderator"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf mgr:hasSpeaker .
+
+mgr:hasGuestSpeaker a owl:ObjectProperty ;
+    rdfs:label "a pour conférencier invité"@fr, "has guest speaker"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf mgr:hasSpeaker .
+
+mgr:hasAudienceMember a owl:ObjectProperty ;
+    rdfs:label "a pour membre du public"@fr, "has audience member"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf mgr:hasSpeaker .
+
+mgr:isSpeakerOf a owl:ObjectProperty ;
+    rdfs:label "est conférencier dans"@fr, "is speaker in"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    owl:inverseOf mgr:hasSpeaker .
+
+mgr:isModeratorOf a owl:ObjectProperty ;
+    rdfs:label "est modérateur de"@fr, "is moderator of"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf mgr:isSpeakerOf ;
+    owl:inverseOf mgr:hasModerator .
+
+mgr:isGuestSpeakerOf a owl:ObjectProperty ;
+    rdfs:label "est conférencier invité de"@fr, "is guest speaker of"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf mgr:isSpeakerOf ;
+    owl:inverseOf mgr:hasGuestSpeaker .
+
+mgr:isAudienceMemberOf a owl:ObjectProperty ;
+    rdfs:label "est membre du public de"@fr, "is audience member of"@en ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf mgr:isSpeakerOf ;
+    owl:inverseOf mgr:hasAudienceMember .
+
+mgr:hasContributor a owl:ObjectProperty ;
+    rdfs:label "a pour contributeur"@fr, "has contributor"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf schema:contributor .
+
+mgr:includesWork a owl:ObjectProperty ;
+    rdfs:label "inclut l'œuvre"@fr, "includes work"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:CreativeWork ;
+    rdfs:subPropertyOf schema:workFeatured .
+
+mgr:hasTopic a owl:ObjectProperty ;
+    rdfs:label "a pour sujet"@fr, "has topic"@en ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range skos:Concept.
+
+# ==========================================
+# Data Properties
+# ==========================================
+mgr:syracuseId a owl:DatatypeProperty ;
+    rdfs:label "identifiant Syracuse"@fr, "Syracuse ID"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:TalkPart mgr:Recording mgr:RecordingPart mgr:ContextEvent schema:Person) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier .
+
+mgr:documentId a owl:DatatypeProperty ;
+    rdfs:label "identifiant documentId"@fr, "documentId"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:TalkPart mgr:Recording mgr:RecordingPart mgr:ContextEvent schema:Person) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier .
+
+mgr:title a owl:DatatypeProperty ;
+    rdfs:label "titre"@fr, "title"@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:title .
+
+mgr:subtitle a owl:DatatypeProperty ;
+    rdfs:label "sous-titre"@fr, "subtitle"@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:title .
+
+mgr:summary a owl:DatatypeProperty ;
+    rdfs:label "résumé"@fr, "summary"@en ;
+    skos:altLabel "abstract"@en, "description"@fr ;
+    rdfs:domain owl:Thing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:description .
+
+mgr:padURL a owl:DatatypeProperty ;
+    rdfs:label "URL on pad.philharmoniedeparis.fr"@fr, "URL on pad.philharmoniedeparis.fr"@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf schema:url, rdfs:seeAlso .
+
+mgr:noticeType a owl:DatatypeProperty ;
+    rdfs:label "notice type"@en, "type de notice"@fr ;
+    rdfs:comment "Philharmonie-specific metadata property about the file notice type (e.g., MPA1, MPA2)."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range xsd:string .
+
+mgr:recordingType a owl:DatatypeProperty ;
+    rdfs:label "recording type"@en, "type d'enregistrement"@fr ;
+    rdfs:comment "The general media type, such as audio or video."@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Recording mgr:RecordingPart) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf schema:encodingFormat .
+
+mgr:mediaFormat a owl:DatatypeProperty ;
+    rdfs:label "media format"@en, "format du média"@fr ;
+    rdfs:comment "The specific technical format of the video or audio track (e.g., mp3, mp4, wav)."@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Recording mgr:RecordingPart) ] ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:format, schema:fileFormat .
+
+mgr:startTime a owl:DatatypeProperty ;
+    rdfs:label "start time"@en, "temps de début"@fr ;
+    rdfs:comment "Start timestamp in seconds relative to the full recording file."@en ;
+    rdfs:domain mgr:RecordingPart ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf schema:startTime .
+
+mgr:endTime a owl:DatatypeProperty ;
+    rdfs:label "end time"@en, "temps de fin"@fr ;
+    rdfs:comment "End timestamp in seconds relative to the full recording file."@en ;
+    rdfs:domain mgr:RecordingPart ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf schema:endTime .
+
+# ==========================================
+# SKOS Concepts Schemes
+# ==========================================
+tt:talkTypeScheme a skos:ConceptScheme ;
+    skos:prefLabel "Taxonomie des types de conférences"@fr, "Talk Types Taxonomy"@en .
+
+cet:contextEventTypeScheme a skos:ConceptScheme ;
+    skos:prefLabel "Taxonomie des types d'événements contextuels"@fr, "Context Event Types Taxonomy"@en .
+
+tpt:talkPartTypeScheme a skos:ConceptScheme ;
+    skos:prefLabel "Taxonomie des types de parties de conférences"@fr, "Talk Part Types Taxonomy"@en .
+
+# ==========================================
+# Individual SKOS Concepts
+# ==========================================
+
+# tt:talkTypeScheme Individual Concepts (instances of mgr:TalkType)
+tt:panel a mgr:TalkType ;
+    skos:inScheme tt:talkTypeScheme ;
+    skos:prefLabel "Table ronde"@fr, "Panel discussion"@en ;
+    skos:definition "Discussion structurée entre plusieurs spécialistes sur un sujet donné, souvent en présence d'un modérateur."@fr .
+
+tt:keynote a mgr:TalkType ;
+    skos:inScheme tt:talkTypeScheme ;
+    skos:prefLabel "Keynote"@fr, "Keynote"@en ;
+    skos:definition "Conférence d'un seul spécialiste invité."@fr .
+
+# cet:contextEventTypeScheme Individual Concepts (instances of mgr:ContextEvent)
+cet:exhibition a mgr:ContextEventType ;
+    skos:inScheme cet:contextEventTypeScheme ;
+    skos:prefLabel "Exposition"@fr, "Exhibition"@en .
+
+cet:culturalSeason a mgr:ContextEventType ;
+    skos:inScheme cet:contextEventTypeScheme ;
+    skos:prefLabel "Saison culturelle"@fr, "Cultural season"@en .
+
+# tt:talkPartTypeScheme Individual Concepts (instances of mgr:TalkPartType)
+tpt:speakerTurn a mgr:TalkPartType ;
+    skos:inScheme tpt:talkPartTypeScheme ;
+    skos:prefLabel "Tour de parole"@fr, "Speaker turn"@en ;
+    skos:definition "Segment d'une conférence correspondant à la prise de parole d'un intervenant."@fr .
+
+tpt:chapter a mgr:TalkPartType ;
+    skos:inScheme tpt:talkPartTypeScheme ;
+    skos:prefLabel "Chapitre"@fr, "Chapter"@en ;
+    skos:definition "Segment généralement long d'une conférence correspondant à un sujet ou de thème."@fr .
+
+tpt:librarianChapter a mgr:TalkPartType ;
+    skos:inScheme tpt:talkPartTypeScheme ;
+    skos:narrower tpt:chapter ;
+    skos:prefLabel "Chapitre défini par un bibliothécaire"@fr, "Librarian chapter"@en ;
+    skos:definition "Segment généralement long d'une conférence correspondant à un sujet ou de thème défini par un catalogueur."@fr .

@@ -1,4 +1,4 @@
-# Talk modeule - Glossary
+# Talk module - Glossary
 
 | Term (English / Français) | Category | Definition / Description |
 | --- | --- | --- |

@@ -7,18 +7,28 @@ A talk may be a part of a serie of talks that are connected because they share a
 A talk may included listening/viewing of other works like musical excerpts, movie excerpts etc.
 One to many speakers may be present in the talk, having different roles like being the modarator or a guest specialist.
 
-A ```Talk``` is described by a bunch of properties as:
-* ```identifiers``` (at least one mandatory) including source institution IDs and KG ids
-* a ```title``` (mandatory)
-* a ```subtitle``` (optional)
-* a ```description``` or ```summary``` (optional)
-* a ```date``` and ```time``` (mandatory for date, optional for time)
-* a ```place``` (optional)
-* a ```type``` of event/talk (optional)
-* an ```organizer``` (natural or moral person)
-* a list of ```keywords``` related to it's topic may be provided (optional)
-* a list of ```persons``` related to the event may be provided (speakers, presents or mentionned) (optional)
-* one or many ```URL``` related to the talk (for example a web page)
+A `Talk` is described by a bunch of properties as:
+* `identifiers` (at least one mandatory) including source institution IDs and KG ids
+* a `title` (mandatory)
+* a `subtitle` (optional)
+* a `description` or `summary` (optional)
+* a `date` and `time` (mandatory for date, optional for time)
+* a `place` (optional)
+* a `type` of event/talk (optional)
+* an `organizer` (natural or moral person)
+* a list of `keywords` related to it's topic may be provided (optional)
+* a list of `persons` related to the event may be provided (speakers) (optional)
+* one or many `URL` related to the talk (for example a web page)
+
+A `TalkPart` is a segment of the talk defined following a certain coherence logic (speaker turn, topic consistency etc.). It is associated to a part of a recording and to a transcript segment. It may have:
+* identifiers (mandatory)
+    * May have a Syracuse_Id
+    * May have a document_Id
+    * Shure have an internal id in the KG
+* a `title` (optional)
+* a `summary` (optionnal)
+* a list of `persons` related to the event may be provided (speakers) (optional)
+* a list of `keywords` related to it's topic may be provided (optional)
 
 ## Examples
 ### Example 1 : talk (1)
@@ -79,7 +89,16 @@ Notes:
 * *in this example, the subtitle is a list of the speakers, not a proper subtitle*
 * the keyword taxonomie as also information about the type of talk and detailed indexation
 
-### Example 3: contextual event (1)
+### Example 3: talk part (1)
+* Identifiers:
+    * Syracuse_id: 975930
+    * Document_Id: ak6c9myyxdevnm9d6hjeuhib
+* Part of Talk(732301)
+* **Title**: 1. La ville de Terezin
+* Record in RecordPart(975930)
+* Transcribed in TranscriptPart(uuid)
+
+### Example 4: contextual event (1)
 * **Event title** : Le Troisième Reich et la musique
 * **Event type** : exhibition
 * **Start date** : 8 octobre 2004
@@ -87,7 +106,7 @@ Notes:
 * **Place** : Musée de la musique, Paris
 * **URL** : https://pad.philharmoniedeparis.fr/exposition-le-troisieme-reich-et-la-musique.aspx
 
-### Example 4: person being speaker (1)
+### Example 5: person being speaker (1)
 * **Identifiers**:
     * **Syracuse_Id**: 733065
 * **Label**: Jeanne-Martine Vacher
@@ -100,7 +119,7 @@ Notes:
     * Talk(732285)
     * Talk(732301)
 
-### Example 5: person being speaker (2)
+### Example 6: person being speaker (2)
 * **Identifiers**:
     * **Syracuse_Id**: 1207087
 * **Label**: Georges Arthur Goldschmidt

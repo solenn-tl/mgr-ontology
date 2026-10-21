@@ -1,0 +1,28 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix mgr: <http://data.mgr.fr/ontology/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+
+# Ensures that if a file URL is provided, it is a valid URI structure.
+mgr:RecordingFileUrlShape a sh:NodeShape ;
+    sh:targetClass mgr:Recording ;
+    sh:property [
+        sh:path schema:contentUrl ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:anyURI ;
+        sh:message "The recording file URL must be a valid URI."@en ;
+    ] .
+
+# Validates that a RecordingPart file URL includes a temporal media fragment (#t=...). W3C Media Fragments Enforcement
+mgr:RecordingPartMediaFragmentShape a sh:NodeShape ;
+    sh:targetClass mgr:RecordingPart ;
+    sh:property [
+        sh:path schema:contentUrl ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:anyURI ;
+        # Regex checks that the URL ends with or contains a valid media fragment temporal selector (#t=...)
+        # Matches patterns like: ...file.mp3#t=681.98,3040.25 or ...file.mp3#t=npt:681.98,3040.25
+        sh:pattern "^https?://.*#t=([0-9\\.]+|npt:[0-9\\.:]+)(,[0-9\\.]+)?$" ;
+        sh:message "The recording part file URL must follow the W3C Media Fragments URI 1.0 specification with a temporal fragment (e.g., #t=start,end)."@en ;
+    ] .
