@@ -446,7 +446,6 @@ mgr:hasTranscriptPart a owl:ObjectProperty ;
     rdfs:subPropertyOf schema:hasPart, dcterms:hasPart ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
-
 mgr:isPartOfTranscript a owl:ObjectProperty ;
     rdfs:label "is part of transcript"@en, "fait partie de la transcription"@fr ;
     skos:prefLabel "is part of transcript"@en, "fait partie de la transcription"@fr ;
@@ -491,7 +490,8 @@ mgr:hasTopic a owl:ObjectProperty ;
     rdfs:label "a pour sujet"@fr, "has topic"@en ;
     rdfs:comment "Relates a talk to the topic it addresses."@en,
     "Relie une conférence au sujet ou mot-clé qu'elle aborde."@fr ;
-    rdfs:domain mgr:Talk ;
+    rdfs:domain [ a owl:Class ;
+        owl:unionOf (mgr:Talk mgr:TalkPart mgr:TalkSet) ] ;
     rdfs:range skos:Concept;
     rdfs:isDefinedBy <https://w3id.org/mgr#> ;
     owl:inverseOf  mgr:isTopicOf .
@@ -501,7 +501,8 @@ mgr:isTopicOf a owl:ObjectProperty ;
     rdfs:comment "Relates a topic to the talk that addresses it."@en,
     "Relie un sujet ou mot-clé à la conférence qui l'aborde."@fr ;
     rdfs:domain skos:Concept;
-    rdfs:range mgr:Talk ;
+    rdfs:range  [ a owl:Class ;
+        owl:unionOf (mgr:Talk mgr:TalkPart mgr:TalkSet) ] ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> ;
     owl:inverseOf mgr:hasTopic .
 
@@ -605,10 +606,23 @@ mgr:isAudienceMemberOf a owl:ObjectProperty ;
 
 mgr:hasContributor a owl:ObjectProperty ;
     rdfs:label "a pour contributeur"@fr, "has contributor"@en ;
+    rdfs:comment "Relates a talk to une person who contributed to it."@en ,
+    "Relie une conférence à une personne qui y a contribué."@fr ;
     rdfs:domain mgr:Talk ;
     rdfs:range schema:Person ;
     rdfs:subPropertyOf schema:contributor ;
-    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:isContributorOf .
+
+mgr:isContributorOf a owl:ObjectProperty ;
+    rdfs:label "est contributeur de"@fr, "is contributor of"@en ;
+    rdfs:comment "Relates a person to the talk they contributed to."@en ,
+    "Relie une personne à la conférence à laquelle elle a contribué."@fr ;
+    rdfs:domain schema:Person ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf schema:contributor ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:hasContributor .
 
 mgr:hasTime a owl:ObjectProperty ;
     rdfs:label "a pour temps"@fr, "has time"@en ;
@@ -631,6 +645,8 @@ mgr:hasTimeInterval a owl:ObjectProperty ;
 # ==========================================
 mgr:syracuseId a owl:DatatypeProperty ;
     rdfs:label "identifiant Syracuse"@fr, "Syracuse ID"@en ;
+    rdfs:comment "Philharmonie-specific metadata property about the Syracuse ID of an item."@en ,
+    "Propriété de métadonnées spécifique au SI de la Philharmonie concernant l'identifiant Syracuse d'un élément."@fr ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:TalkPart mgr:Recording mgr:RecordingPart mgr:ContextEvent schema:Person) ] ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:identifier ;
@@ -638,6 +654,8 @@ mgr:syracuseId a owl:DatatypeProperty ;
 
 mgr:documentId a owl:DatatypeProperty ;
     rdfs:label "identifiant documentId"@fr, "documentId"@en ;
+    rdfs:comment "Philharmonie-specific metadata property about the document ID of an item."@en ,
+    "Propriété de métadonnées spécifique au SI de la Philharmonie concernant l'identifiant documentId d'un élément."@fr ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:TalkPart mgr:Recording mgr:RecordingPart mgr:ContextEvent schema:Person) ] ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:identifier ;
@@ -645,6 +663,7 @@ mgr:documentId a owl:DatatypeProperty ;
 
 mgr:title a owl:DatatypeProperty ;
     rdfs:label "titre"@fr, "title"@en ;
+    rdfs:comment "The title of an item."@en, "Le titre d'un élément."@fr ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:title ;
@@ -652,6 +671,7 @@ mgr:title a owl:DatatypeProperty ;
 
 mgr:subtitle a owl:DatatypeProperty ;
     rdfs:label "sous-titre"@fr, "subtitle"@en ;
+    rdfs:comment "The subtitle of an item."@en, "Le sous-titre d'un élément."@fr ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:title ;
@@ -659,6 +679,7 @@ mgr:subtitle a owl:DatatypeProperty ;
 
 mgr:summary a owl:DatatypeProperty ;
     rdfs:label "résumé"@fr, "summary"@en ;
+    rdfs:comment "A summary of an item."@en, "Un résumé d'un élément."@fr ;
     skos:altLabel "abstract"@en, "description"@fr ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
@@ -667,6 +688,8 @@ mgr:summary a owl:DatatypeProperty ;
 
 mgr:padURL a owl:DatatypeProperty ;
     rdfs:label "URL on pad.philharmoniedeparis.fr"@fr, "URL on pad.philharmoniedeparis.fr"@en ;
+    rdfs:comment "Philharmonie-specific metadata property about the URL of a pad.philharmoniedeparis.fr page."@en ,
+    "Propriété de métadonnées spécifique au SI de la Philharmonie concernant l'URL d'une page pad.philharmoniedeparis.fr."@fr ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:anyURI ;
     rdfs:subPropertyOf schema:url, rdfs:seeAlso ;
@@ -674,14 +697,15 @@ mgr:padURL a owl:DatatypeProperty ;
 
 mgr:noticeType a owl:DatatypeProperty ;
     rdfs:label "notice type"@en, "type de notice"@fr ;
-    rdfs:comment "Philharmonie-specific metadata property about the file notice type (e.g., MPA1, MPA2)."@en ;
+    rdfs:comment "Philharmonie-specific metadata property about the file notice type (e.g., MPA1, MPA2)."@en ,
+    "Propriété de métadonnées spécifique au SI de la Philharmonie concernant le type de notice du fichier (par exemple, MPA1, MPA2)."@fr ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:recordingType a owl:DatatypeProperty ;
     rdfs:label "recording type"@en, "type d'enregistrement"@fr ;
-    rdfs:comment "The general media type, such as audio or video."@en ;
+    rdfs:comment "The general media type, such as audio or video."@en, "Le type de média général, tel que l'audio ou la vidéo."@fr ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Recording mgr:RecordingPart) ] ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf schema:encodingFormat ;
@@ -689,7 +713,8 @@ mgr:recordingType a owl:DatatypeProperty ;
 
 mgr:mediaFormat a owl:DatatypeProperty ;
     rdfs:label "media format"@en, "format du média"@fr ;
-    rdfs:comment "The specific technical format of the video or audio track (e.g., mp3, mp4, wav)."@en ;
+    rdfs:comment "The specific technical format of the video or audio track (e.g., mp3, mp4, wav)."@en, 
+    "Le format technique spécifique de la piste vidéo ou audio (par exemple, mp3, mp4, wav)."@fr ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Recording mgr:RecordingPart) ] ;
     rdfs:range xsd:string ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> ;
@@ -697,22 +722,23 @@ mgr:mediaFormat a owl:DatatypeProperty ;
 
 mgr:startTime a owl:DatatypeProperty ;
     rdfs:label "start time"@en, "temps de début"@fr ;
-    rdfs:comment "Start timestamp in seconds relative to the full recording file."@en ;
-    rdfs:domain mgr:RecordingPart ;
+    rdfs:comment "Start timestamp in seconds relative to the full recording file."@en, "Timestamp de début en secondes par rapport au fichier d'enregistrement complet."@fr ;
+    rdfs:domain owl:Thing ;
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf schema:startTime ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:endTime a owl:DatatypeProperty ;
     rdfs:label "end time"@en, "temps de fin"@fr ;
-    rdfs:comment "End timestamp in seconds relative to the full recording file."@en ;
-    rdfs:domain mgr:RecordingPart ;
+    rdfs:comment "End timestamp in seconds relative to the full recording file."@en, "Timestamp de fin en secondes par rapport au fichier d'enregistrement complet."@fr ;
+    rdfs:domain owl:Thing ;
     rdfs:range xsd:decimal ;
     rdfs:subPropertyOf schema:endTime ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:textValue a owl:DatatypeProperty ;
     rdfs:label "text value"@en, "valeur textuelle"@fr ;
+    rdfs:comment "The text value of a transcript or transcript part."@en, "La valeur textuelle d'une transcription ou d'une partie de transcription."@fr ;
     rdfs:domain mgr:TranscriptPart ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf schema:text ;
@@ -720,37 +746,46 @@ mgr:textValue a owl:DatatypeProperty ;
 
 mgr:chunkOrder a owl:DatatypeProperty ;
     rdfs:label "chunk order"@en, "ordre du segment"@fr ;
+    rdfs:comment "The order of a chunk within a transcript."@en, "L'ordre d'un segment dans une transcription."@fr ;
     rdfs:domain mgr:TranscriptPart ;
     rdfs:range xsd:integer ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:chunkingProcess a owl:DatatypeProperty ;
     rdfs:label "chunking process"@en, "processus de segmentation"@fr ;
+    rdfs:comment "The process used to segment a transcript into chunks."@en, "Le processus utilisé pour segmenter une transcription en segments."@fr ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:TranscriptPart mgr:Transcript) ] ;
     rdfs:range prov:Activity ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:transcriptionScore a owl:DatatypeProperty ;
     rdfs:label "transcription score"@en, "score de transcription"@fr ;
-    rdfs:comment "A score indicating the quality of the transcription often derived from/equal to ASR engine confidence scores."@en ;
+    rdfs:comment "A score indicating the quality of the transcription often derived from/equal to ASR engine confidence scores."@en, 
+    "Un score indiquant la qualité de la transcription, souvent dérivé des scores de confiance du moteur ASR."@fr ;
     rdfs:domain mgr:TranscriptPart ;
     rdfs:range xsd:decimal ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:characterErrorRate a owl:DatatypeProperty ;
     rdfs:label "character error rate"@en, "taux d'erreur de caractères"@fr ;
+    rdfs:comment "The character error rate (CER) in a transcription."@en, 
+    "Le taux d'erreurs au niveau des caractères (CER) dans une transcription."@fr ;
     rdfs:domain mgr:TranscriptPart ;
     rdfs:range xsd:decimal ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:wordErrorRate a owl:DatatypeProperty ;
     rdfs:label "word error rate"@en, "taux d'erreur de mots"@fr ;
+    rdfs:comment "The word error rate (WER) in a transcription."@en, 
+    "Le taux d'erreurs au niveau des mots (WER) dans une transcription."@fr ;
     rdfs:domain mgr:TranscriptPart ;
     rdfs:range xsd:decimal ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:asrSpeakerId a owl:DatatypeProperty ;
     rdfs:label "ASR speaker"@en, "locuteur ASR"@fr ;
+    rdfs:comment "The speaker ID assigned by the ASR engine."@en, 
+    "L'identifiant du locuteur attribué par le moteur ASR."@fr ;
     rdfs:domain mgr:TranscriptPart ;
     rdfs:range xsd:string ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
