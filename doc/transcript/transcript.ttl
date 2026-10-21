@@ -1,0 +1,92 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix mgr: <http://data.mgr.fr/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+### ==========================================
+### Classes (Transcript Module)
+### ==========================================
+
+mgr:Transcript a owl:Class ;
+    rdfs:label "Transcript"@en, "Transcription"@fr ;
+    rdfs:comment "A derived textual version of a recording or recording part that captures a talk."@en ;
+    rdfs:subClassOf schema:CreativeWork .
+
+mgr:TranscriptPart a owl:Class ;
+    rdfs:label "Transcript Part"@en, "Partie de transcription"@fr ;
+    rdfs:comment "An elementary segment of a transcription aligned with a recording part and timestamp."@en ;
+    rdfs:subClassOf oa:Annotation, schema:CreativeWork .
+
+### ==========================================
+### Object Properties
+### ==========================================
+
+mgr:hasTranscriptPart a owl:ObjectProperty ;
+    rdfs:label "has transcript part"@en, "a pour partie de transcription"@fr ;
+    rdfs:domain mgr:Transcript ;
+    rdfs:range mgr:TranscriptPart ;
+    rdfs:subPropertyOf schema:hasPart, dcterms:hasPart .
+
+mgr:isPartOfTranscript a owl:ObjectProperty ;
+    rdfs:label "is part of transcript"@en, "fait partie de la transcription"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range mgr:Transcript ;
+    rdfs:subPropertyOf schema:isPartOf, dcterms:isPartOf .
+
+mgr:isTranscriptOf a owl:ObjectProperty ;
+    rdfs:label "is transcript of"@en, "est la transcription de"@fr ;
+    rdfs:domain mgr:Transcript ;
+    rdfs:range schema:MediaObject ; # Can point to mgr:Recording or mgr:RecordingPart
+    rdfs:subPropertyOf dcterms:source .
+
+mgr:transcriptTarget a owl:ObjectProperty ;
+    rdfs:label "transcript target"@en, "cible de transcription"@fr ;
+    rdfs:comment "Connects a transcript part to the media target (RecordingPart or MediaObject) it annotates."@en ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range schema:MediaObject ;
+    rdfs:subPropertyOf oa:hasTarget .
+
+### ==========================================
+### Datatype Properties
+### ==========================================
+
+mgr:textValue a owl:DatatypeProperty ;
+    rdfs:label "text value"@en, "valeur textuelle"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf schema:text .
+
+mgr:chunkOrder a owl:DatatypeProperty ;
+    rdfs:label "chunk order"@en, "ordre du segment"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:integer .
+
+mgr:chunkingProcess a owl:DatatypeProperty ;
+    rdfs:label "chunking process"@en, "processus de segmentation"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range prov:Activity .
+
+mgr:transcriptionScore a owl:DatatypeProperty ;
+    rdfs:label "transcription score"@en, "score de transcription"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:decimal .
+
+mgr:characterErrorRate a owl:DatatypeProperty ;
+    rdfs:label "character error rate"@en, "taux d'erreur de caractères"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:decimal .
+
+mgr:wordErrorRate a owl:DatatypeProperty ;
+    rdfs:label "word error rate"@en, "taux d'erreur de mots"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:decimal .
+
+mgr:asrSpeakerId a owl:DatatypeProperty ;
+    rdfs:label "ASR speaker"@en, "locuteur ASR"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:string .

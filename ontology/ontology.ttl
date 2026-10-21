@@ -1,22 +1,25 @@
+@prefix : <https://w3id.org/mgr#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix cet: <http://data.mgr.fr/id/codes/contexteventtype/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix mgr: <http://data.mgr.fr/ontology/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix organization: <http://www.w3.org/ns/org#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix tt: <http://data.mgr.fr/id/codes/talktype/> .
-@prefix tpt: <http://data.mgr.fr/id/codes/talkparttype/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix time: <http://www.w3.org/2006/time#> .
+@prefix tpt: <http://data.mgr.fr/id/codes/talkparttype/> .
+@prefix tt: <http://data.mgr.fr/id/codes/talktype/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix widoco: <https://w3id.org/widoco/vocab#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # ---- Ontology metadata ----
 <https://w3id.org/mgr#> a owl:Ontology, voaf:Vocabulary ;
@@ -134,254 +137,494 @@
     #"A brief text for the introduction section may be written here."@en ;
     #rdfs:seeAlso <>.
 
-# ---- Annotation properties ----
-owl:deprecated a owl:AnnotationProperty ;
-    rdfs:isDefinedBy owl: .
-skos:definition a owl:AnnotationProperty ;
-    rdfs:isDefinedBy skos: .
-skos:inScheme a owl:AnnotationProperty ;
-    rdfs:isDefinedBy skos: .
-skos:prefLabel a owl:AnnotationProperty ;
-    rdfs:isDefinedBy skos: .
-skos:altLabel a owl:AnnotationProperty ;
-    rdfs:isDefinedBy skos: .
-skos:broader a owl:ObjectProperty ;
-    rdfs:isDefinedBy skos: ;
-    owl:inverseOf skos:narrower .
-skos:narrower a owl:ObjectProperty ;
-    rdfs:isDefinedBy skos: ;
-    owl:inverseOf skos:broader .
-skos:closeMatch a owl:ObjectProperty ;
-    rdfs:isDefinedBy skos:.
-skos:exactMatch a owl:ObjectProperty ;
-    rdfs:isDefinedBy skos:.
-skos:related a owl:ObjectProperty ;
-    rdfs:isDefinedBy skos:.
-rdfs:seeAlso a owl:AnnotationProperty ;
-    rdfs:isDefinedBy rdfs: .
-
 # ==========================================
 # Classes
 # ==========================================
 mgr:Talk a owl:Class ;
     rdfs:label "Talk"@en, "Conférence"@fr ;
-    rdfs:comment "An individual talk, lecture, forum, or roundtable presentation."@en ;
-    rdfs:subClassOf schema:ConferenceEvent .
+    skos:prefLabel "Talk"@en, "Conférence"@fr ;
+    rdfs:comment "An individual talk, lecture, forum, or roundtable presentation."@en, 
+    "Une conférence individuelle, un cours, un forum ou une table ronde."@fr ;
+    rdfs:subClassOf schema:Event ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:TalkPart a owl:Class ;
     rdfs:label "Talk part"@en, "Partie de conférence"@fr ;
-    rdfs:comment "A segment of a talk defined by coherence logic such as a speaker turn or topic consistency."@en ;
-    rdfs:subClassOf schema:Event .
+    skos:prefLabel "Talk part"@en, "Partie de conférence"@fr ;
+    rdfs:comment "A segment of a talk defined by coherence logic such as a speaker turn or topic consistency."@en, 
+    "Un segment d'une conférence défini par une logique de cohérence, comme un tour de parole ou une cohérence de sujet."@fr ;
+    rdfs:subClassOf schema:Event ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:TalkSet a owl:Class ;
     rdfs:label "Talk set"@en, "Ensemble de conférences"@fr ;
-    rdfs:comment "A set of talks, lectures, forums, or roundtable presentations linked by a common theme or purpose."@en ;
-    rdfs:subClassOf schema:EventSeries .
+    skos:prefLabel "Talk set"@en, "Ensemble de conférences"@fr ;
+    rdfs:comment "A set of talks, lectures, forums, or roundtable presentations linked by a common theme."@en,
+    "Un ensemble de conférences, de cours, de forums ou de tables ronde liées par un thème commun."@fr ;
+    rdfs:subClassOf schema:EventSeries ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:TalkType a owl:Class ;
     rdfs:label "Talk type"@en, "Type de conférence"@fr ;
-    rdfs:comment "Class of concepts representing types of talks like lecture, forum, or roundtable presentation."@en;
-    rdfs:subClassOf skos:Concept .
+    skos:prefLabel "Talk type"@en, "Type de conférence"@fr ;
+    rdfs:comment "Class of concepts representing types of talks like lecture, forum, or roundtable presentation."@en, 
+    "Classe de concepts représentant les types de conférences comme une conférence, un forum ou une table ronde."@fr ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:ContextEvent a owl:Class ;
     rdfs:label "Context event"@en, "Événement contextuel"@fr ;
-    rdfs:comment "An event that provides context for a talk or talk set, such as a festival, exhibition, or cultural season."@en ;
-    rdfs:subClassOf schema:Event .
+    skos:prefLabel "Context event"@en, "Événement contextuel"@fr ;
+    rdfs:comment "An event that provides context for a talk or talk set, such as a festival, exhibition, or cultural season."@en, 
+    "Un événement qui fournit un contexte pour une conférence ou un ensemble de conférences, comme un festival, une exposition ou une saison culturelle."@fr ;
+    rdfs:subClassOf schema:Event ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:ContextEventType a owl:Class ;
     rdfs:label "Context event type"@en, "Type d'événement contextuel"@fr ;
-    rdfs:comment "Class of concepts representing types of context events like festival, exhibition, or cultural season."@en;
-    rdfs:subClassOf skos:Concept .
+    skos:prefLabel "Context event type"@en, "Type d'événement contextuel"@fr ;
+    rdfs:comment "Class of concepts representing types of context events like festival, exhibition, or cultural season."@en, 
+    "Classe de concepts représentant les types d'événements contextuels comme un festival, une exposition ou une saison culturelle."@fr ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:Recording a rdfs:Class ;
     rdfs:label "Recording"@en, "Enregistrement"@fr ;
-    rdfs:comment "A video or audio realization that fixes a record of a talk or event."@en ;
-    rdfs:subClassOf schema:MediaObject .
+    skos:prefLabel "Recording"@en, "Enregistrement"@fr ;
+    rdfs:comment "A video or audio realization that fixes a record of a talk or event."@en,
+    "Une réalisation vidéo ou audio qui fixe un enregistrement d'une conférence ou d'un événement."@fr ;
+    rdfs:subClassOf schema:MediaObject ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:RecordingPart a rdfs:Class ;
     rdfs:label "Recording Part"@en, "Partie d'enregistrement"@fr ;
-    rdfs:comment "A segment or excerpt of a top-level recording."@en ;
-    rdfs:subClassOf schema:MediaObject .
+    skos:prefLabel "Recording Part"@en, "Partie d'enregistrement"@fr ;
+    rdfs:comment "A segment or excerpt of a top-level recording."@en, 
+    "Un segment ou un extrait d'un enregistrement de niveau supérieur."@fr ;
+    rdfs:subClassOf schema:MediaObject ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:Transcript a owl:Class ;
+    rdfs:label "Transcript"@en, "Transcription"@fr ;
+    skos:prefLabel "Transcript"@en, "Transcription"@fr ;
+    rdfs:comment "A derived textual version of a recording or recording part that captures a talk."@en, 
+    "Une version textuelle dérivée d'un enregistrement ou d'une partie d'enregistrement qui capture une conférence."@fr ;
+    rdfs:subClassOf schema:CreativeWork ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:TranscriptPart a owl:Class ;
+    rdfs:label "Transcript Part"@en, "Partie de transcription"@fr ;
+    skos:prefLabel "Transcript Part"@en, "Partie de transcription"@fr ;
+    rdfs:comment "An elementary segment of a transcription aligned with a recording part and timestamp."@en, 
+    "Un segment élémentaire d'une transcription alignée avec une partie d'enregistrement et un timestamp."@fr ;
+    rdfs:subClassOf oa:Annotation, schema:CreativeWork ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 # ==========================================
 # Object Properties
 # ==========================================
 mgr:isOrganizedInContextOf a owl:ObjectProperty ;
     rdfs:label "is organized in context of"@en, "est organisé dans le contexte de"@fr ;
-    rdfs:comment "Relates a talk or talk set to a context event that provides additional context for the event."@en; 
+    skos:prefLabel "is organized in context of"@en, "est organisé dans le contexte de"@fr ;
+    rdfs:comment "Relates a talk or talk set to a context event that provides additional context for it."@en, 
+    "Relie une conférence ou un ensemble de conférences à un événement contextuel qui fournit un contexte supplémentaire pour celle-ci."@fr ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet) ] ;
-    rdfs:range mgr:ContextEvent .
+    rdfs:range mgr:ContextEvent ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:isOrganizedBy a owl:ObjectProperty ;
     rdfs:label "is organized by"@en, "est organisé par"@fr ;
-    rdfs:comment "Relates a talk or talk set to the organization responsible for organizing the event."@en; 
-    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet) ] ;
-    rdfs:range owl:Thing .
+    skos:prefLabel "is organized by"@en, "est organisé par"@fr ;
+    rdfs:comment "Relates a talk or talk set to the organization responsible for organizing the event."@en, 
+    "Relie une conférence ou un ensemble de conférences ou un évènement à l'organisation responsable de celui-ci."@fr ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:ContextEvent mgr:Talk mgr:TalkSet) ] ;
+    rdfs:range owl:Thing ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:takesPlaceAt a owl:ObjectProperty ;
     rdfs:label "takes place at"@en, "a lieu à"@fr ;
-    rdfs:comment "Relates a talk or talk set to the location where the event takes place."@en; 
+    skos:prefLabel "takes place at"@en, "a lieu à"@fr ;
+    rdfs:comment "Relates a talk or talk set to the location where the event takes place."@en, 
+    "Relie une conférence ou un ensemble de conférences ou un événement à l'emplacement où l'événement se déroule."@fr ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:ContextEvent) ] ;
-    rdfs:range schema:Place .
+    rdfs:range schema:Place ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:isPartOfTalk a owl:ObjectProperty ;
     rdfs:label "fait partie de la conférence"@fr, "is part of talk"@en ;
-    rdfs:comment "Relates a talk part to its parent talk."@en ;
+    skos:prefLabel "fait partie de la conférence"@fr, "is part of talk"@en ;
+    rdfs:comment "Relates a talk part to its parent talk."@en,
+    "Relie une partie de conférence à sa conférence parente."@fr ;
     rdfs:domain mgr:TalkPart ;
     rdfs:range mgr:Talk ;
-    rdfs:subPropertyOf schema:superEvent, dcterms:isPartOf .
+    rdfs:subPropertyOf schema:superEvent, dcterms:isPartOf ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:isPartOfTalkSet a owl:ObjectProperty ;
     rdfs:label "fait partie du cycle"@fr, "is part of talk set"@en ;
+    skos:prefLabel "fait partie du cycle"@fr, "is part of talk set"@en ;
+    rdfs:comment "Relates a talk or talk part to its parent talk set."@en,
+    "Relie une conférence ou une partie de conférence à son ensemble de conférences parent."@fr ;
     rdfs:domain mgr:Talk ;
     rdfs:range mgr:TalkSet ;
-    rdfs:subPropertyOf schema:superEvent, dcterms:isPartOf .
+    rdfs:subPropertyOf schema:superEvent, dcterms:isPartOf ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:hasEventType a owl:ObjectProperty ;
     rdfs:label "type d'événement contextuel"@fr, "event type"@en ;
+    skos:prefLabel "type d'événement contextuel"@fr, "event type"@en ;
+    rdfs:comment "Relates a context event to its type, such as festival, exhibition, or cultural season."@en,
+    "Relie un événement contextuel à son type, comme un festival, une exposition ou une saison culturelle."@fr ;
     rdfs:domain mgr:ContextEvent ;
     rdfs:range mgr:ContextEventType ;
-    rdfs:subPropertyOf dcterms:type .
+    rdfs:subPropertyOf dcterms:type ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:hasTalkType a owl:ObjectProperty ;
     rdfs:label "type de conférence"@fr, "talk type"@en ;
-    rdfs:domain mgr:Talk, mgr:TalkSet ;
+    skos:prefLabel "type de conférence"@fr, "talk type"@en ;
+    rdfs:comment "Relates a talk or talk set to its type, such as lecture, forum, or roundtable presentation."@en,
+    "Relie une conférence ou un ensemble de conférences à son type, comme une conférence, un forum ou une table ronde."@fr ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet) ] ;
     rdfs:range mgr:TalkType ;
-    rdfs:subPropertyOf dcterms:type .
+    rdfs:subPropertyOf dcterms:type ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:hasTalkPartType a owl:ObjectProperty ;
     rdfs:label "type de partie de conférence"@fr, "talk part type"@en ;
+    skos:prefLabel "type de partie de conférence"@fr, "talk part type"@en ;
+    rdfs:comment "Relates a talk part to its type, such as speaker turn or a thematic chapter."@en,
+    "Relie une partie de conférence à son type, comme un tour de parole ou un chapitre thématique."@fr ;
     rdfs:domain mgr:TalkPart ;
     rdfs:range mgr:TalkPartType ;
-    rdfs:subPropertyOf dcterms:type .
+    rdfs:subPropertyOf dcterms:type ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
+#### Talk and Recording Relationships
 mgr:isRecordingOf a owl:ObjectProperty ;
     rdfs:label "is recording of"@en, "est l'enregistrement de"@fr ;
-    rdfs:comment "Relates a recording to the talk it captures."@en ;
+    skos:prefLabel "is recording of"@en, "est l'enregistrement de"@fr ;
+    rdfs:comment "Relates a recording to the talk it captures."@en,
+    "Relie un enregistrement à la conférence qu'il capture."@fr ;
     rdfs:domain mgr:Recording ;
     rdfs:range mgr:Talk ;
-    rdfs:subPropertyOf schema:about .
+    rdfs:subPropertyOf schema:recordedIn ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:hasRecording .
 
+mgr:hasRecording a owl:ObjectProperty ;
+    rdfs:label "has recording"@en, "a pour enregistrement"@fr ;
+    skos:prefLabel "has recording"@en, "a pour enregistrement"@fr ;
+    rdfs:comment "Relates a talk to the recording that captures it."@en,
+    "Relie une conférence à l'enregistrement qui la capture."@fr ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range mgr:Recording ;
+    rdfs:subPropertyOf schema:recordedIn ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:isRecordingOf .
+
+## Super-property hasTranscript/isTranscriptOf
+
+mgr:isTranscriptOf a owl:ObjectProperty ;
+    rdfs:label "is transcript of"@en, "est la transcription de"@fr ;
+    skos:prefLabel "is transcript of"@en, "est la transcription de"@fr ;
+    rdfs:comment "Relates a transcript to the recording or recording part it transcribes."@en,
+    "Relie une transcription à l'enregistrement ou à la partie d'enregistrement qu'elle transcrit."@fr ; 
+    rdfs:domain [ a owl:Class ;
+                  owl:unionOf ( mgr:Transcript mgr:TranscriptPart ) ] ;
+    rdfs:range [ a owl:Class ;
+                  owl:unionOf ( schema:MediaObject mgr:Talk mgr:TalkPart ) ] ;
+    rdfs:subPropertyOf dcterms:source ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:hasTranscript a owl:ObjectProperty ;
+    rdfs:label "has transcript"@en, "a pour transcription"@fr ;
+    skos:prefLabel "has transcript"@en, "a pour transcription"@fr ;
+    rdfs:comment "Relates a recording or recording part to the transcript that transcribes it."@en,
+    "Relie un enregistrement ou une partie d'enregistrement à une transcription correspondante."@fr ; 
+    rdfs:domain [ a owl:Class ;
+                  owl:unionOf ( schema:MediaObject mgr:Talk mgr:TalkPart ) ] ;
+    rdfs:range [ a owl:Class ;
+                  owl:unionOf ( mgr:Transcript mgr:TranscriptPart ) ] ;
+    rdfs:subPropertyOf dcterms:source ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+### Recording and Transcript
+mgr:isTranscriptOfRecording a owl:ObjectProperty ;
+    rdfs:label "is transcript of"@en, "est la transcription de"@fr ;
+    skos:prefLabel "is transcript of"@en, "est la transcription de"@fr ;
+    rdfs:comment "Relates a transcript to the recording or recording part it transcribes."@en,
+    "Relie une transcription à l'enregistrement ou à la partie d'enregistrement qu'elle transcrit."@fr ; 
+    rdfs:domain [ a owl:Class ;
+                  owl:unionOf ( mgr:Transcript mgr:TranscriptPart ) ] ;
+    rdfs:range schema:MediaObject ; 
+    rdfs:subPropertyOf mgr:isTranscriptOf ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:hasRecordingTranscript a owl:ObjectProperty ;
+    rdfs:label "has transcript"@en, "a pour transcription"@fr ;
+    skos:prefLabel "has transcript"@en, "a pour transcription"@fr ;
+    rdfs:comment "Relates a recording or recording part to the transcript that transcribes it."@en,
+    "Relie un enregistrement ou une partie d'enregistrement à la transcription qui le transcrit."@fr ; 
+    rdfs:domain schema:MediaObject ; # Can point to mgr:Recording or mgr:RecordingPart
+    rdfs:range [ a owl:Class ;
+                  owl:unionOf ( mgr:Transcript mgr:TranscriptPart ) ] ;
+    rdfs:subPropertyOf mgr:hasTranscript ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+# Transcript and Talk 
+mgr:isTranscriptOfTalk a owl:ObjectProperty ;
+    rdfs:label "is transcript of talk"@en, "est la transcription de la conférence"@fr ;
+    skos:prefLabel "is transcript of talk"@en, "est la transcription de la conférence"@fr ;
+    rdfs:comment "Relates a transcript to the talk it transcribes."@en,
+    "Relie une transcription à la conférence qu'elle transcrit."@fr ; 
+    rdfs:domain mgr:Transcript ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf mgr:isTranscriptOf ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:hasTalkTranscript a owl:ObjectProperty ;
+    rdfs:label "has talk transcript"@en, "a pour transcription de conférence"@fr ;
+    skos:prefLabel "has talk transcript"@en, "a pour transcription de conférence"@fr ;
+    rdfs:comment "Relates a talk to a transcript of it."@en,
+    "Relie une conférence à une transcription correspondante."@fr ; 
+    rdfs:domain mgr:Talk ;
+    rdfs:range mgr:Transcript ;
+    rdfs:subPropertyOf mgr:hasTranscript ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+#Relations between recording and talk parts
+mgr:depictsTalkPart a owl:ObjectProperty ;
+    rdfs:label "depicts talk part"@en, "illustre la partie de conférence"@fr ;
+    skos:prefLabel "depicts talk part"@en, "illustre la partie de conférence"@fr ;
+    rdfs:comment "Connects a recording part to the intellectual discourse segment (TalkPart) it captures."@en,
+    "Relie une partie d'enregistrement à l'élément de discours intellectuel (TalkPart) qu'elle capture."@fr ;
+    rdfs:domain mgr:RecordingPart ;
+    rdfs:range mgr:TalkPart ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:isDepictedInRecordingPart .
+
+mgr:isDepictedInRecordingPart a owl:ObjectProperty ;
+    rdfs:label "is depicted in recording part"@en, "est illustré dans la partie d'enregistrement"@fr ;
+    skos:prefLabel "is depicted in recording part"@en, "est illustré dans la partie d'enregistrement"@fr ;
+    rdfs:comment "Connects a talk part to the recording part that captures it."@en,
+    "Relie une partie de conférence à la partie d'enregistrement qui la capture."@fr ;
+    rdfs:domain mgr:TalkPart ;
+    rdfs:range mgr:RecordingPart ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:depictsTalkPart .
+
+# Relations between recordings and their parts
 mgr:hasRecordingPart a owl:ObjectProperty ;
     rdfs:label "has recording part"@en, "a pour partie d'enregistrement"@fr ;
-    rdfs:comment "Relates a top-level recording to one of its segments or parts."@en ;
+    skos:prefLabel "has recording part"@en, "a pour partie d'enregistrement"@fr ;
+    rdfs:comment "Relates a top-level recording to one of its segments or parts."@en, 
+    "Relie un enregistrement de niveau supérieur à l'un de ses segments ou parties."@fr ;
     rdfs:domain mgr:Recording ;
     rdfs:range mgr:RecordingPart ;
-    rdfs:subPropertyOf schema:hasPart, dcterms:hasPart .
+    rdfs:subPropertyOf schema:hasPart, dcterms:hasPart ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:isPartOfRecording a owl:ObjectProperty ;
     rdfs:label "is part of recording"@en, "fait partie de l'enregistrement"@fr ;
-    rdfs:comment "Relates a recording part to its parent top-level recording."@en ;
+    skos:prefLabel "is part of recording"@en, "fait partie de l'enregistrement"@fr ;
+    rdfs:comment "Relates a recording part to its parent top-level recording."@en, 
+    "Relie une partie d'enregistrement à son enregistrement de niveau supérieur parent."@fr ;
     rdfs:domain mgr:RecordingPart ;
     rdfs:range mgr:Recording ;
-    rdfs:subPropertyOf schema:isPartOf, dcterms:isPartOf .
+    rdfs:subPropertyOf schema:isPartOf, dcterms:isPartOf ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
-mgr:depictsTalkPart a owl:ObjectProperty ;
-    rdfs:label "depicts talk part"@en, "illustre la partie de conférence"@fr ;
-    rdfs:comment "Connects a recording part to the intellectual discourse segment (TalkPart) it captures."@en ;
-    rdfs:domain mgr:RecordingPart ;
-    rdfs:range mgr:TalkPart .
+#Relations between transcripts and their parts
+mgr:hasTranscriptPart a owl:ObjectProperty ;
+    rdfs:label "has transcript part"@en, "a pour partie de transcription"@fr ;
+    skos:prefLabel "has transcript part"@en, "a pour partie de transcription"@fr ;
+    rdfs:comment "Relates a transcript to one of its segments or parts."@en,
+    "Relie une transcription à l'un de ses segments ou parties."@fr ;
+    rdfs:domain mgr:Transcript ;
+    rdfs:range mgr:TranscriptPart ;
+    rdfs:subPropertyOf schema:hasPart, dcterms:hasPart ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
+
+mgr:isPartOfTranscript a owl:ObjectProperty ;
+    rdfs:label "is part of transcript"@en, "fait partie de la transcription"@fr ;
+    skos:prefLabel "is part of transcript"@en, "fait partie de la transcription"@fr ;
+    rdfs:comment "Relates a transcript part to its parent transcript."@en,
+    "Relie une partie de transcription à sa transcription parente."@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range mgr:Transcript ;
+    rdfs:subPropertyOf schema:isPartOf, dcterms:isPartOf ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+# Relations between transcript (parts) and their media targets (recording and parts)
+mgr:transcriptTarget a owl:ObjectProperty ;
+    rdfs:label "transcript target"@en, "cible de transcription"@fr ;
+    rdfs:comment "Connects a transcript part to the media target (RecordingPart or MediaObject) it annotates."@en ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range schema:MediaObject ;
+    rdfs:subPropertyOf oa:hasTarget ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+# Traite les inclusions d'œuvres dans les conférences
+mgr:includesWork a owl:ObjectProperty ;
+    rdfs:label "inclut l'œuvre"@fr, "includes work"@en ;
+    rdfs:comment "Relates a talk to the work it features or discusses or plays. It can be an excerpt of the work."@en,
+    "Relie une conférence à une œuvre qu'elle présente ou discute ou joue. Cela peut être un extrait de l'œuvre uniquement."@fr;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:CreativeWork ;
+    rdfs:subPropertyOf schema:workFeatured ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf  mgr:workIsIncludedIn .
+
+mgr:workIsIncludedIn a owl:ObjectProperty ;
+    rdfs:label "œuvre incluse dans"@fr, "work is included in"@en ;
+    rdfs:comment "Relates a work to the talk that features or discusses or plays it. It can be an excerpt of the work."@en,
+    "Relie une œuvre à la conférence qui la présente ou discute ou joue. Cela peut être un extrait de l'œuvre uniquement."@fr;
+    rdfs:domain schema:CreativeWork ;
+    rdfs:range mgr:Talk ;
+    rdfs:subPropertyOf schema:workFeatured ;
+    owl:inverseOf mgr:includesWork ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:hasTopic a owl:ObjectProperty ;
+    rdfs:label "a pour sujet"@fr, "has topic"@en ;
+    rdfs:comment "Relates a talk to the topic it addresses."@en,
+    "Relie une conférence au sujet ou mot-clé qu'elle aborde."@fr ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range skos:Concept;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf  mgr:isTopicOf .
+
+mgr:isTopicOf a owl:ObjectProperty ;
+    rdfs:label "est sujet de"@fr, "is topic of"@en ;
+    rdfs:comment "Relates a topic to the talk that addresses it."@en,
+    "Relie un sujet ou mot-clé à la conférence qui l'aborde."@fr ;
+    rdfs:domain skos:Concept;
+    rdfs:range mgr:Talk ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:hasTopic .
+
+# Persoonns roles in talks and recordings
 mgr:hasDirector a owl:ObjectProperty ;
     rdfs:label "has director"@en, "a pour réalisateur"@fr ;
     rdfs:comment "Relates a recording to the person in charge of recording and/or editing."@en ;
     rdfs:domain mgr:Recording ;
     rdfs:range schema:Person ;
-    rdfs:subPropertyOf schema:director.
+    rdfs:subPropertyOf schema:director;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:isDirectorOf a owl:ObjectProperty ;
     rdfs:label "is director of"@en, "est le réalisateur de"@fr ;
     rdfs:comment "Relates a person to the recording they directed."@en ;
     rdfs:domain schema:Person ;
     rdfs:range mgr:Recording ;
-    rdfs:subPropertyOf schema:director .
-
-mgr:hasTime a owl:ObjectProperty ;
-    rdfs:label "a pour temps"@fr, "has time"@en ;
-    rdfs:comment "Relates a thing to a temporal entity (instant or interval)."@en ;
-    rdfs:domain owl:Thing ;
-    rdfs:range time:TemporalEntity ;
-    rdfs:subPropertyOf time:hasTime .
-    
-mgr:hasTimeInterval a owl:ObjectProperty ;
-    rdfs:label "has time span"@en, "a pour intervalle de temps"@fr ;
-    rdfs:comment "Relates a thing to a temporal interval representing its start and end time."@en ;
-    rdfs:domain owl:Thing ;
-    rdfs:range time:Interval ;
-    rdfs:subPropertyOf time:hasTime .
+    rdfs:subPropertyOf schema:director ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:isSpeakerOf a owl:ObjectProperty ;
     rdfs:label "est conférencier dans"@fr, "is speaker in"@en ;
+    rdfs:comment "Relates a person to the talk they are speaking in."@en ,
+    "Relie une personne à la conférence dans laquelle elle intervient."@fr ;
     rdfs:domain schema:Person ;
-    rdfs:range mgr:Talk .
+    rdfs:range mgr:Talk ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:hasSpeaker .
 
 mgr:hasSpeaker a owl:ObjectProperty ;
     rdfs:label "a pour conférencier"@fr, "has speaker"@en ;
+    rdfs:comment "Relates a talk to the person who is speaking in it."@en ,
+    "Relie une conférence à la personne qui y intervient."@fr ;
     rdfs:domain mgr:Talk ;
     rdfs:range schema:Person ;
-    rdfs:subPropertyOf schema:performer .
+    rdfs:subPropertyOf schema:performer ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:isSpeakerOf .
 
 mgr:hasModerator a owl:ObjectProperty ;
     rdfs:label "a pour modérateur"@fr, "has moderator"@en ;
+    rdfs:comment "Relates a talk to the person who is moderating it."@en ,
+    "Relie une conférence à la personne qui la modère."@fr ;
     rdfs:domain mgr:Talk ;
     rdfs:range schema:Person ;
-    rdfs:subPropertyOf mgr:hasSpeaker .
-
-mgr:hasGuestSpeaker a owl:ObjectProperty ;
-    rdfs:label "a pour conférencier invité"@fr, "has guest speaker"@en ;
-    rdfs:domain mgr:Talk ;
-    rdfs:range schema:Person ;
-    rdfs:subPropertyOf mgr:hasSpeaker .
-
-mgr:hasAudienceMember a owl:ObjectProperty ;
-    rdfs:label "a pour membre du public"@fr, "has audience member"@en ;
-    rdfs:domain mgr:Talk ;
-    rdfs:range schema:Person ;
-    rdfs:subPropertyOf mgr:hasSpeaker .
-
-mgr:isSpeakerOf a owl:ObjectProperty ;
-    rdfs:label "est conférencier dans"@fr, "is speaker in"@en ;
-    rdfs:domain schema:Person ;
-    rdfs:range mgr:Talk ;
-    owl:inverseOf mgr:hasSpeaker .
+    rdfs:subPropertyOf mgr:hasSpeaker ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:isModeratorOf .
 
 mgr:isModeratorOf a owl:ObjectProperty ;
     rdfs:label "est modérateur de"@fr, "is moderator of"@en ;
+    rdfs:comment "Relates a person to the talk they are moderating."@en ,
+    "Relie une personne à la conférence qu'elle modère."@fr ;
     rdfs:domain schema:Person ;
     rdfs:range mgr:Talk ;
     rdfs:subPropertyOf mgr:isSpeakerOf ;
-    owl:inverseOf mgr:hasModerator .
+    owl:inverseOf mgr:hasModerator ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:hasGuestSpeaker a owl:ObjectProperty ;
+    rdfs:label "a pour conférencier invité"@fr, "has guest speaker"@en ;
+    rdfs:comment "Relates a talk to the person who is a guest speaker in it."@en ,
+    "Relie une conférence à la personne qui y intervient en tant que conférencier invité."@fr ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf mgr:hasSpeaker ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:isGuestSpeakerOf .
 
 mgr:isGuestSpeakerOf a owl:ObjectProperty ;
     rdfs:label "est conférencier invité de"@fr, "is guest speaker of"@en ;
+    rdfs:comment "Relates a person to the talk they are a guest speaker in."@en ,
+    "Relie une personne à la conférence dans laquelle elle intervient en tant que conférencier invité."@fr ;
     rdfs:domain schema:Person ;
     rdfs:range mgr:Talk ;
     rdfs:subPropertyOf mgr:isSpeakerOf ;
+    owl:inverseOf mgr:hasGuestSpeaker ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
     owl:inverseOf mgr:hasGuestSpeaker .
+
+mgr:hasAudienceMember a owl:ObjectProperty ;
+    rdfs:label "a pour membre du public"@fr, "has audience member"@en ;
+    rdfs:comment "Relates a talk to the person who is an audience member in it and speaks."@en ,
+    "Relie une conférence à la personne qui y assiste en tant que membre du public et prend la parole."@fr ;
+    rdfs:domain mgr:Talk ;
+    rdfs:range schema:Person ;
+    rdfs:subPropertyOf mgr:hasSpeaker ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
+    owl:inverseOf mgr:isAudienceMemberOf .
 
 mgr:isAudienceMemberOf a owl:ObjectProperty ;
     rdfs:label "est membre du public de"@fr, "is audience member of"@en ;
+    rdfs:comment "Relates a person to the talk they are an audience member in and speak in."@en ,
+    "Relie une personne à la conférence dans laquelle elle assiste en tant que membre du public et prend la parole."@fr ;
     rdfs:domain schema:Person ;
     rdfs:range mgr:Talk ;
     rdfs:subPropertyOf mgr:isSpeakerOf ;
+    owl:inverseOf mgr:hasAudienceMember ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
     owl:inverseOf mgr:hasAudienceMember .
 
 mgr:hasContributor a owl:ObjectProperty ;
     rdfs:label "a pour contributeur"@fr, "has contributor"@en ;
     rdfs:domain mgr:Talk ;
     rdfs:range schema:Person ;
-    rdfs:subPropertyOf schema:contributor .
+    rdfs:subPropertyOf schema:contributor ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
-mgr:includesWork a owl:ObjectProperty ;
-    rdfs:label "inclut l'œuvre"@fr, "includes work"@en ;
-    rdfs:domain mgr:Talk ;
-    rdfs:range schema:CreativeWork ;
-    rdfs:subPropertyOf schema:workFeatured .
-
-mgr:hasTopic a owl:ObjectProperty ;
-    rdfs:label "a pour sujet"@fr, "has topic"@en ;
-    rdfs:domain mgr:Talk ;
-    rdfs:range skos:Concept.
+mgr:hasTime a owl:ObjectProperty ;
+    rdfs:label "a pour temps"@fr, "has time"@en ;
+    rdfs:comment "Relates a thing to a temporal entity (instant or interval)."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range time:TemporalEntity ;
+    rdfs:subPropertyOf time:hasTime ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+    
+mgr:hasTimeInterval a owl:ObjectProperty ;
+    rdfs:label "has time span"@en, "a pour intervalle de temps"@fr ;
+    rdfs:comment "Relates a thing to a temporal interval representing its start and end time."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range time:Interval ;
+    rdfs:subPropertyOf time:hasTime ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 # ==========================================
 # Data Properties
@@ -390,57 +633,66 @@ mgr:syracuseId a owl:DatatypeProperty ;
     rdfs:label "identifiant Syracuse"@fr, "Syracuse ID"@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:TalkPart mgr:Recording mgr:RecordingPart mgr:ContextEvent schema:Person) ] ;
     rdfs:range xsd:string ;
-    rdfs:subPropertyOf dcterms:identifier .
+    rdfs:subPropertyOf dcterms:identifier ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:documentId a owl:DatatypeProperty ;
     rdfs:label "identifiant documentId"@fr, "documentId"@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Talk mgr:TalkSet mgr:TalkPart mgr:Recording mgr:RecordingPart mgr:ContextEvent schema:Person) ] ;
     rdfs:range xsd:string ;
-    rdfs:subPropertyOf dcterms:identifier .
+    rdfs:subPropertyOf dcterms:identifier ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:title a owl:DatatypeProperty ;
     rdfs:label "titre"@fr, "title"@en ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
-    rdfs:subPropertyOf dcterms:title .
+    rdfs:subPropertyOf dcterms:title ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:subtitle a owl:DatatypeProperty ;
     rdfs:label "sous-titre"@fr, "subtitle"@en ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
-    rdfs:subPropertyOf dcterms:title .
+    rdfs:subPropertyOf dcterms:title ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:summary a owl:DatatypeProperty ;
     rdfs:label "résumé"@fr, "summary"@en ;
     skos:altLabel "abstract"@en, "description"@fr ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:string ;
-    rdfs:subPropertyOf dcterms:description .
+    rdfs:subPropertyOf dcterms:description ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:padURL a owl:DatatypeProperty ;
     rdfs:label "URL on pad.philharmoniedeparis.fr"@fr, "URL on pad.philharmoniedeparis.fr"@en ;
     rdfs:domain owl:Thing ;
     rdfs:range xsd:anyURI ;
-    rdfs:subPropertyOf schema:url, rdfs:seeAlso .
+    rdfs:subPropertyOf schema:url, rdfs:seeAlso ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:noticeType a owl:DatatypeProperty ;
     rdfs:label "notice type"@en, "type de notice"@fr ;
     rdfs:comment "Philharmonie-specific metadata property about the file notice type (e.g., MPA1, MPA2)."@en ;
     rdfs:domain owl:Thing ;
-    rdfs:range xsd:string .
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:recordingType a owl:DatatypeProperty ;
     rdfs:label "recording type"@en, "type d'enregistrement"@fr ;
     rdfs:comment "The general media type, such as audio or video."@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Recording mgr:RecordingPart) ] ;
     rdfs:range xsd:string ;
-    rdfs:subPropertyOf schema:encodingFormat .
+    rdfs:subPropertyOf schema:encodingFormat ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:mediaFormat a owl:DatatypeProperty ;
     rdfs:label "media format"@en, "format du média"@fr ;
     rdfs:comment "The specific technical format of the video or audio track (e.g., mp3, mp4, wav)."@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf (mgr:Recording mgr:RecordingPart) ] ;
     rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> ;
     rdfs:subPropertyOf dcterms:format, schema:fileFormat .
 
 mgr:startTime a owl:DatatypeProperty ;
@@ -448,26 +700,78 @@ mgr:startTime a owl:DatatypeProperty ;
     rdfs:comment "Start timestamp in seconds relative to the full recording file."@en ;
     rdfs:domain mgr:RecordingPart ;
     rdfs:range xsd:decimal ;
-    rdfs:subPropertyOf schema:startTime .
+    rdfs:subPropertyOf schema:startTime ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:endTime a owl:DatatypeProperty ;
     rdfs:label "end time"@en, "temps de fin"@fr ;
     rdfs:comment "End timestamp in seconds relative to the full recording file."@en ;
     rdfs:domain mgr:RecordingPart ;
     rdfs:range xsd:decimal ;
-    rdfs:subPropertyOf schema:endTime .
+    rdfs:subPropertyOf schema:endTime ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:textValue a owl:DatatypeProperty ;
+    rdfs:label "text value"@en, "valeur textuelle"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf schema:text ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:chunkOrder a owl:DatatypeProperty ;
+    rdfs:label "chunk order"@en, "ordre du segment"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:integer ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:chunkingProcess a owl:DatatypeProperty ;
+    rdfs:label "chunking process"@en, "processus de segmentation"@fr ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (mgr:TranscriptPart mgr:Transcript) ] ;
+    rdfs:range prov:Activity ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:transcriptionScore a owl:DatatypeProperty ;
+    rdfs:label "transcription score"@en, "score de transcription"@fr ;
+    rdfs:comment "A score indicating the quality of the transcription often derived from/equal to ASR engine confidence scores."@en ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:decimal ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:characterErrorRate a owl:DatatypeProperty ;
+    rdfs:label "character error rate"@en, "taux d'erreur de caractères"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:decimal ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:wordErrorRate a owl:DatatypeProperty ;
+    rdfs:label "word error rate"@en, "taux d'erreur de mots"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:decimal ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+mgr:asrSpeakerId a owl:DatatypeProperty ;
+    rdfs:label "ASR speaker"@en, "locuteur ASR"@fr ;
+    rdfs:domain mgr:TranscriptPart ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 # ==========================================
 # SKOS Concepts Schemes
 # ==========================================
 tt:talkTypeScheme a skos:ConceptScheme ;
-    skos:prefLabel "Taxonomie des types de conférences"@fr, "Talk Types Taxonomy"@en .
+    skos:prefLabel "Taxonomie des types de conférences"@fr, "Talk Types Taxonomy"@en ;
+    skos:definition "Taxonomie des types de conférences, telles que les tables rondes et les keynotes."@fr, 
+    "Taxonomy of talk types, such as panels and keynotes."@en .
 
 cet:contextEventTypeScheme a skos:ConceptScheme ;
-    skos:prefLabel "Taxonomie des types d'événements contextuels"@fr, "Context Event Types Taxonomy"@en .
+    skos:prefLabel "Taxonomie des types d'événements contextuels"@fr, "Context Event Types Taxonomy"@en ;
+    skos:definition "Taxonomie des types d'événements contextuels, tels que les festivals, expositions et saisons culturelles."@fr,
+    "Taxonomy of context event types, such as festivals, exhibitions, and cultural seasons." .
 
 tpt:talkPartTypeScheme a skos:ConceptScheme ;
-    skos:prefLabel "Taxonomie des types de parties de conférences"@fr, "Talk Part Types Taxonomy"@en .
+    skos:prefLabel "Taxonomie des types de parties de conférences"@fr, "Talk Part Types Taxonomy"@en ;
+    skos:definition "Taxonomie des types de parties de conférences, telles que les chapitres, sous-chapitres et tours de parole."@fr, 
+    "Taxonomy of talk part types, such as chapters, subchapters, and speaker turns."@en .
 
 # ==========================================
 # Individual SKOS Concepts
@@ -493,19 +797,18 @@ cet:culturalSeason a mgr:ContextEventType ;
     skos:inScheme cet:contextEventTypeScheme ;
     skos:prefLabel "Saison culturelle"@fr, "Cultural season"@en .
 
-# tt:talkPartTypeScheme Individual Concepts (instances of mgr:TalkPartType)
-tpt:speakerTurn a mgr:TalkPartType ;
-    skos:inScheme tpt:talkPartTypeScheme ;
-    skos:prefLabel "Tour de parole"@fr, "Speaker turn"@en ;
-    skos:definition "Segment d'une conférence correspondant à la prise de parole d'un intervenant."@fr .
-
+# tpt:talkPartTypeScheme Individual Concepts (instances of mgr:TalkPartType)
 tpt:chapter a mgr:TalkPartType ;
     skos:inScheme tpt:talkPartTypeScheme ;
     skos:prefLabel "Chapitre"@fr, "Chapter"@en ;
     skos:definition "Segment généralement long d'une conférence correspondant à un sujet ou de thème."@fr .
 
-tpt:librarianChapter a mgr:TalkPartType ;
+tpt:subchapter a mgr:TalkPartType ;
     skos:inScheme tpt:talkPartTypeScheme ;
-    skos:narrower tpt:chapter ;
-    skos:prefLabel "Chapitre défini par un bibliothécaire"@fr, "Librarian chapter"@en ;
-    skos:definition "Segment généralement long d'une conférence correspondant à un sujet ou de thème défini par un catalogueur."@fr .
+    skos:prefLabel "Sous-chapitre"@fr, "Subchapter"@en ;
+    skos:definition "Segment plus court qu'un chapitre, souvent utilisé pour structurer une conférence en parties plus petites."@fr .
+
+tpt:speakerTurn a mgr:TalkPartType ;
+    skos:inScheme tpt:talkPartTypeScheme ;
+    skos:prefLabel "Tour de parole"@fr, "Speaker turn"@en ;
+    skos:definition "Segment d'une conférence correspondant à la prise de parole d'un intervenant."@fr .
