@@ -1,32 +1,44 @@
 # MGR Ontology
 
 This repository contains the documentation and RDF implementation of the Music Graph RAG ontology devoted to the representation of music talks and associated knowledge that should be usable for semantic retrieval tasks.
-Ontology has been developped using the SAMOD methodology and tested with the Philharmonie de Paris - Cité de la Musique talks, recordings, transcript and metadata.
-Further developpement may validate and extend the ontology with other general audience talks.
 
 ## Methodology and validation
-* The ontology reuses concepts and properties of:
-    * Schema.org ontology
-    * DCTerms ontology
-    * Prov-O ontology
-    * Time Ontology
-* The ontology consistency has been validated in Protégé with HermiT reasonner and with Widoco.
-* Annotation properties have been checked with Mentor.
+* Ontology has been developped using the [SAMOD methodology](https://essepuntato.it/samod/) and tested with the [Philharmonie de Paris - Cité de la Musique talks](https://pad.philharmoniedeparis.fr/), recordings, transcript and metadata.
+* The MGR ontology reuses concepts and properties of:
+    * [Schema.org](https://schema.org/) ontology
+    * [Dublin Core DCMI Metadata Terms](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) ontology (DCTERMS)
+    * [Prov-O](https://www.w3.org/TR/prov-o/) ontology
+    * [Time](https://www.w3.org/TR/owl-time/) ontology
+* Audio excerpts URL are build following the [W3C Media Fragments Enforcement](https://www.w3.org/TR/media-frags/) guidelines.
+* The ontology consistency has been validated in [Protégé](https://protege.stanford.edu/) with HermiT reasonner and with [Widoco](https://dgarijo.github.io/Widoco/doc/tutorial/#widoco_intro).
+* Annotation properties have been checked with [Mentor](https://mentor-vscode.dev/).
 * Gemini Auto model has been use to correct typos and improve formulation in french and english. The ontology developement has been performed by the authors.
+* Further developpement may validate and extend the ontology with other general audience talks.
 
 ## SAMOD documentation (```doc``` folder)
+*For each module, a motivation scenario (`_scenario.md`), a list of competency questions (`_cq.md`), a glossary (`_glossary.md`) and examples of RDF implementations with a chart (`_to_rdf.md`) are provided.*
 * The ```Talk``` module aims to describe talks independently from its recorded versions (video, audio, associated transcript). It focuses on the questions <i>Who? What? When? Where?</i>
 * The ```Recording``` module aims to described audio or video realization of a talk and associated excerpts.  
 * The ```Transcript``` module aims to structure the textual version of audio/video recording. The module also include struring of the talk based on several transcript splitting.
 * The ```Entities``` module aims to decribe the main type of entities that may be retrieved or associated with the conferences: persons, places, organizations, musical terms, work of art, historical events etc. 
 * The ```Activity``` module is devotated to the sourcing of the informations in the KG, including representation of the automated process using to structure knowledge from the recordings and transcripts.
-* The ```Retrieval``` module aims to facilitate the use of the knowledge graph in chunk level retrieval process.
+* The ```Retrieval``` module aims to facilitate the use of the knowledge graph for chunk level retrieval process.
 
 ## Ontology implementation (```ontology``` folder)
 The ontology has been natively developped in Turtle format.
 The folder also contains SHACL rules that helps checking the KG consistency.
 
 ## KG construction (```script``` folder)
+TBA
+
+### Metadata-based construction
+* Talks
+* Recordings
+* Transcript (ASR-splitting)
+    * One named graph per chunking strategy
+
+### Entities
+* A knowledge base of Persons and Work of Arts is maintained by the Philharmonie. We use it to initiate a referential of candidates for entity linking. We perform linking between them and other KGS like Wikidata and DOREMUS (already built with data from Bnf, Philharmonie and Radio France). 
 
 ## References
 * Peroni SAMOD
