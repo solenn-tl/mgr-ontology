@@ -15,7 +15,7 @@ This repository contains the documentation and RDF implementation of the Music G
 * Gemini Auto model has been use to correct typos and improve formulation in french and english. The ontology developement has been performed by the authors.
 * Further developpement may validate and extend the ontology with other general audience talks.
 
-## SAMOD documentation (```doc``` folder)
+## SAMOD documentation (```nl-doc``` folder)
 *For each module, a motivation scenario (`_scenario.md`), a list of competency questions (`_cq.md`), a glossary (`_glossary.md`) and examples of RDF implementations with a chart (`_to_rdf.md`) are provided.*
 * The ```Talk``` module aims to describe talks independently from its recorded/derived versions (video, audio, associated transcript). It focuses on the questions <i>Who? What? When? Where?</i>
 * The ```Recording``` module aims to described audio or video realization of a talk and associated excerpts.  
@@ -27,6 +27,9 @@ This repository contains the documentation and RDF implementation of the Music G
 ## Ontology implementation (```ontology``` folder)
 The ontology has been natively developped in Turtle format.
 The folder also contains SHACL rules that helps checking the KG consistency.
+
+## Widoco doc (```docs``` folder)
+This folder contains the documentation of the ontology generated with Widoco using the .ttl file in ```ontology``` folder.
 
 ## KG construction (```script``` folder)
 TBA
