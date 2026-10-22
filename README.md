@@ -17,12 +17,12 @@ This repository contains the documentation and RDF implementation of the Music G
 
 ## SAMOD documentation (```doc``` folder)
 *For each module, a motivation scenario (`_scenario.md`), a list of competency questions (`_cq.md`), a glossary (`_glossary.md`) and examples of RDF implementations with a chart (`_to_rdf.md`) are provided.*
-* The ```Talk``` module aims to describe talks independently from its recorded versions (video, audio, associated transcript). It focuses on the questions <i>Who? What? When? Where?</i>
+* The ```Talk``` module aims to describe talks independently from its recorded/derived versions (video, audio, associated transcript). It focuses on the questions <i>Who? What? When? Where?</i>
 * The ```Recording``` module aims to described audio or video realization of a talk and associated excerpts.  
-* The ```Transcript``` module aims to structure the textual version of audio/video recording. The module also include struring of the talk based on several transcript splitting.
-* The ```Entities``` module aims to decribe the main type of entities that may be retrieved or associated with the conferences: persons, places, organizations, musical terms, work of art, historical events etc. 
-* The ```Activity``` module is devotated to the sourcing of the informations in the KG, including representation of the automated process using to structure knowledge from the recordings and transcripts.
-* The ```Retrieval``` module aims to facilitate the use of the knowledge graph for chunk level retrieval process.
+* The ```Transcript``` module aims to structure the textual version of a talk/recording. The module also include talk parts that can follow various splitting/chunking strategies.
+* The ```Entities``` module aims to decribe the main type of entities that may be retrieved or associated with the conferences: persons, work of art, places, organizations, musical terms, historical events etc. 
+* The ```Activity``` module is devotated to the sourcing of the informations added to the KG (how they have been provided etc.). 
+* The ```Retrieval``` module aims to facilitate the use of the knowledge graph for chunk level retrieval process (shortcut properties etc.).
 
 ## Ontology implementation (```ontology``` folder)
 The ontology has been natively developped in Turtle format.
