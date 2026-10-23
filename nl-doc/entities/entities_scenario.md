@@ -46,7 +46,7 @@ The Philharmonie thesaurus contains a range of organization instales bellow the 
 * a **syracuse_id** (*mandatory*)
 * a **label** (*mandatory*)
 
-### Event
+#### Event
 * It includes historical period and events (as Middle Age, World War II, etc.) but also precise cultural events set are certain dates (ex: Summer festival 2009, season 2004-2005).
 
 The Philharmonie thesaurus contains a range of historical periods bellow the `Histoire -> Période historique` group of keywords (`DESC145865 -> DESC145864`). They are described with: 
@@ -91,30 +91,37 @@ The Philharmonie thesaurus contains a range of historical periods bellow the `Hi
 * The Philharmonie thesaurus contains music terms:
     * instruments: `Instrument de musique (DESC155964)`
     * part of instruments: `Instrument de musique (élément) (DESC145780)`
-    * music style: `Art -> Musique -> Genre musical (DESC144952 -> DESC144958 -> DESC67193)`
-    * creation of instruments: `Facture instrumentale -> Matériau ()`
-    * tools: `Facture instrumentale -> Outil (DESC155527 -> )`
+    * music style: `Art -> Musique -> Genre musical (DESC144952 -> DESC144958 -> DESC67193)` and `Style musical (DESC68608)`
+    * creation of instruments: `Facture instrumentale -> Matériau (DESC155527 -> DESC155547)`
+    * tools: `Facture instrumentale -> Outil (DESC155527 -> DESC155554)`
 
 ## Examples (1): In metadata
+*We observe that personnes can be described differently in the metadata, between keys but also bellow a same key.*
+### Example 1.1: person (1)
+*Example retrieved in the people key of metadata of a talk*
+* Talk(1140650) :
+* Person syracuse_id : 54229
+* Person documentId : y80cndhqpm8mo9pbyeiwrkuu
+* First name: Olivier
+* Last name: Baumont
 
-### Example 1.1: person (speaker)
-* Talk() :
-* Person syracuse_id :
-* Entity label : 
-* First name :
-* Last name :
-
-### Example 1.2: person (subject of talk)
-* Talk()
-
-### Example 1.3: place
-
-### Example 1.4: organization
+*Other version in the metadata of the same talk in the speakers key*
+* Talk(1140650) :
+* Value: *Olivier Baumont, claveciniste, professeur au Conservatoire national supérieur de musique et de danse de Paris - CNSMDP, Paris*
 
 ## Examples (2): In talks
+### Example 2.1: person
+* Talk(758797): *Concert donné à l'occasion du 80ème anniversaire de Pierre Boulez*
+* Chunk(1) : *Il y a eu une autre influence en dehors d'une influence picturale comme celle de Clé, c'est celle de Malarmé.*
+* Person(1):
+    * **Span**: "Clé"
+    * **Refers to**: Paul Klee (Q44007), german-swiss artiste (1879–1940)
+* Person(2)
+    * **Span**: "Malarmé"
+    * **Refers to**: Stéphane Mallarmé (Q767), french poet (1842–1898)
 
 ## Notes
-*These entities interact, in the discourse context (Talk) and in the real world context (External knowledge). Some interesting interactions that a user may refers to in a query may not be provided in the context of a talk as the speaker assumes the audience know the information.
+* These entities interact, in the discourse context (Talk) and in the real world context (External knowledge). Some interesting interactions that a user may refers to in a query may not be provided in the context of a talk as the speaker assumes the audience know the information.
     * Relations between entities **in the text** may be discovered using openIE approaches and added as an extension to the MGR  ontology.
     * Relations between entities that already exists in external knownledge bases may be added to the MGR classes and the associated properties added in an extension of the MGR ontology.
 * It would be relevant to link the thesaurus with other KG and ontologies as its keyword are used a lot in the metadata.
