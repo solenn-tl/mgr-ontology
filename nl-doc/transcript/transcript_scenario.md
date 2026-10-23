@@ -1,10 +1,9 @@
 # Transcript module - Scenario
 
-A **transcript** is a derived, textual version of a recording part that captures a talk part. It can be generated manually or automatically using an automated speech recognition tool (ASR).
+A **transcript** is a derived, textual version of  a talk, written during the talk itself or using a recording that captures it. It can be generated manually or automatically using an automated speech recognition tool (ASR).
 Transcripts may also include speaker diarization.
-Synchronization between audio spans (time) and text is mandatory.
 
-A transcript is an aggregation of transcript parts splitted following a certain strategy.
+A **transcript** is an aggregation of transcript parts splitted following a certain strategy.
 * *Talk identifier* (mandatory): has a relation with the corresponding Talk
 * *Recording identifier* (mandatory): has a relation with the corresponding Recording
 * an **identifier** (mandatory)
@@ -12,7 +11,7 @@ A transcript is an aggregation of transcript parts splitted following a certain 
 * an **aggregation strategy** (mandatory): how the associated transcript parts have been splitted
 * 1..n **transcripts parts** (mandatory)
 
-A transcript part is an elementary part of the transcription of a recorded talk, aligned with the recording part (and time).
+A **transcript part** is an elementary part of the transcription of a recorded talk, aligned with the recording part (and time).
 * **segment/chunk identifier** (mandatory)
 * **segment/chunk order** in a full transcript splitted with a given strategy (mandatory)
 * **chunking process**: how the chunk have been produced (e.g. `ASR sentence`, `Chunking strategy A`, etc. mandatory)

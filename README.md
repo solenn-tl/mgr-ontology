@@ -10,8 +10,9 @@ This repository contains the documentation and RDF implementation of the Music G
     * [Prov-O](https://www.w3.org/TR/prov-o/) ontology
     * [Time](https://www.w3.org/TR/owl-time/) ontology
 * Audio excerpts URL are build following the [W3C Media Fragments Enforcement](https://www.w3.org/TR/media-frags/) guidelines.
-* The ontology consistency has been validated in [Protégé](https://protege.stanford.edu/) with HermiT reasonner and with [Widoco](https://dgarijo.github.io/Widoco/doc/tutorial/#widoco_intro).
+* The ontology consistency has been validated in [Protégé](https://protege.stanford.edu/) with HermiT reasonner and with Ooops! (TODO -> down currently).
 * Annotation properties have been checked with [Mentor](https://mentor-vscode.dev/).
+* Final documentation is generated with [Widoco](https://dgarijo.github.io/Widoco/doc/tutorial/#widoco_intro).
 * Gemini Auto model has been use to correct typos and improve formulation in french and english. The ontology developement has been performed by the authors.
 * Further developpement may validate and extend the ontology with other general audience talks.
 
@@ -29,7 +30,7 @@ The ontology has been natively developped in Turtle format.
 The folder also contains SHACL rules that helps checking the KG consistency.
 
 ## Widoco doc (```docs``` folder)
-This folder contains the documentation of the ontology generated with Widoco using the .ttl file in ```ontology``` folder.
+This folder contains the documentation of the ontology generated with Widoco using the `.ttl` file in ```ontology``` folder.
 
 ## KG construction (```script``` folder)
 TBA

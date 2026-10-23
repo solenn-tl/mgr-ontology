@@ -2,7 +2,7 @@
 
 ## Description
 
-A talk is an event organized by an someone (person and/or institution) in order to share informations related to a topic in front of an audience at a certain time and place. 
+A talk is an event organized by an someone (person and/or institution) in order to share informations related to a topic in front of an audience at a certain time and place by a group of N speakers (1..n) who interacts (if N>1). 
 A talk may be a part of a serie of talks that are connected because they share a topic or are associated with a broader event like a musical season, an exhibition, a serial conference, etc. 
 A talk may included listening/viewing of other works like musical excerpts, movie excerpts etc.
 One to many speakers may be present in the talk, having different roles like being the modarator or a guest specialist.
@@ -131,3 +131,31 @@ Notes:
 * **Is guest speaker in**:
     * Talk(732285)
 
+### Exemple 7: set of talks (1)
+* **Identifiers**:
+    * **Syracuse_Id**: 807429
+* **Title**: Musique et marché du travail : Enjeux et perspectives européennes
+* **Subtitle**: séminaire enregistré à la cité de la musique le 17 mars 2007 (10h, amphithéâtre)
+* **Description** : *Not provided*
+* **Type de notice**: MPA1
+* **Place** : Cité de la musique
+* **Date and time** : 2007-03-17T00:00:00.000Z
+* **Talkset type** : séminaire
+* **Organizer**: Philharmonie de Paris - Cité de la musique
+* **Speaker** : *Not provided/divers*
+* **Keywords** :   
+    * DESC880948: Journée professionnelle
+    * DESC145872: 21éme siécle
+    * DESC68442: Marché du travail
+* **Related persons** : 
+    * **Creator** : *Not provided/divers*
+    * **Contributors** : *Not provided/divers*
+* **Related to** : 
+    * Talk(948233): Artistes en Europe, régime d'emploi et statut professionnel 3273.68,
+    * Talk(948262): Echange avec le public 5603.72
+    * Talk(948265): Regard sur l'Allemagne : formation du musicien et marché du travail artistique 6330.76
+    * Talk(948267): Introduction à la deuxième partie de la journée 10538.04
+    * Talk(948271): Table ronde : Qu'est-ce que le management d'artiste? 10722.52
+    * Talk(948277): Table ronde : l'apport de l'étranger : du conservatoire aux parcours individuels 14239.99
+    * Talk(948283): Echange avec le public
+* **URL** : https://pad.philharmoniedeparis.fr/pad/doc/CIMU/0807429/musique-et-marche-du-travail---enjeux-et-perspectives-europeennes

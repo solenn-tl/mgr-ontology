@@ -3,6 +3,7 @@
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix cet: <https://w3id.org/mgr/id/codes/contexteventtype/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix mgr: <https://w3id.org/mgr#> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
@@ -215,6 +216,45 @@ mgr:TranscriptPart a owl:Class ;
     rdfs:subClassOf oa:Annotation, schema:CreativeWork ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
+mgr:MusicTerm a owl:Class ;
+    rdfs:label "Music Term"@en ;
+    rdfs:comment "A broad class encompassing all musical concepts, instruments, styles, and descriptors. The use of more specific classes is recommended for better specificity of each type of musical term."@en ,
+    "Une classe englobant tous les concepts, instruments, styles et descripteurs musicaux. L'utilisation de classes plus précises est recommandée pour une meilleure spécificité de chaque type de terme musical."@fr ;
+    rdfs:isDefinedBy <https://w3id.org/mgr#> .
+
+# Imported classes (added owl:Class declaration for documentation purposes)
+
+## Corresponding to named entities types (NLP), inheriting their properties
+schema:Person a rdfs:Class, owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "A person (alive, dead, undead, or fictional)." ;
+    rdfs:isDefinedBy <http://schema.org/> .
+
+schema:Place a rdfs:Class, owl:Class ;
+    rdfs:label "Place" ;
+    rdfs:comment "Entities that have a somewhat fixed, physical extension." ;
+    rdfs:isDefinedBy <http://schema.org/> .
+
+schema:Organization a rdfs:Class, owl:Class ;
+    rdfs:label "Organization" ;
+    rdfs:comment "An organization such as a school, NGO, corporation, club, etc." ;
+    rdfs:isDefinedBy <http://schema.org/> .
+
+schema:CreativeWork a rdfs:Class, owl:Class;
+    rdfs:label "CreativeWork" ;
+    rdfs:comment "The most generic kind of creative work, including books, movies, photographs, software programs, etc." ;
+    rdfs:isDefinedBy <http://schema.org/> .
+
+schema:Event a rdfs:Class, owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the [[offers]] property. Repeated events may be structured as separate Event objects." ;
+    rdfs:isDefinedBy <http://schema.org/> .
+
+time:TemporalEntity a owl:Class ;
+    rdfs:label "Temporal Entity" ;
+    rdfs:comment "The class of temporal entities." ;
+    rdfs:isDefinedBy <http://www.w3.org/2006/time#> .
+
 # ==========================================
 # Object Properties
 # ==========================================
@@ -346,8 +386,8 @@ mgr:hasTranscript a owl:ObjectProperty ;
 
 ### Recording and Transcript
 mgr:isTranscriptOfRecording a owl:ObjectProperty ;
-    rdfs:label "is transcript of"@en, "est la transcription de"@fr ;
-    skos:prefLabel "is transcript of"@en, "est la transcription de"@fr ;
+    rdfs:label "is transcript of"@en, "est la transcription de l'enregistrement"@fr ;
+    skos:prefLabel "is transcript of"@en, "est la transcription de l'enregistrement"@fr ;
     rdfs:comment "Relates a transcript to the recording or recording part it transcribes."@en,
     "Relie une transcription à l'enregistrement ou à la partie d'enregistrement qu'elle transcrit."@fr ; 
     rdfs:domain [ a owl:Class ;
@@ -357,8 +397,8 @@ mgr:isTranscriptOfRecording a owl:ObjectProperty ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:hasRecordingTranscript a owl:ObjectProperty ;
-    rdfs:label "has transcript"@en, "a pour transcription"@fr ;
-    skos:prefLabel "has transcript"@en, "a pour transcription"@fr ;
+    rdfs:label "has recording transcript"@en, "a pour transcription d'enregistrement"@fr ;
+    skos:prefLabel "has recording transcript"@en, "a pour transcription d'enregistrement"@fr ;
     rdfs:comment "Relates a recording or recording part to the transcript that transcribes it."@en,
     "Relie un enregistrement ou une partie d'enregistrement à la transcription qui le transcrit."@fr ; 
     rdfs:domain schema:MediaObject ; # Can point to mgr:Recording or mgr:RecordingPart
@@ -519,7 +559,7 @@ mgr:isDirectorOf a owl:ObjectProperty ;
     rdfs:isDefinedBy <https://w3id.org/mgr#> .
 
 mgr:isSpeakerOf a owl:ObjectProperty ;
-    rdfs:label "est conférencier dans"@fr, "is speaker in"@en ;
+    rdfs:label "est orateur dans"@fr, "is speaker in"@en ;
     rdfs:comment "Relates a person to the talk they are speaking in."@en ,
     "Relie une personne à la conférence dans laquelle elle intervient."@fr ;
     rdfs:domain schema:Person ;
@@ -528,7 +568,7 @@ mgr:isSpeakerOf a owl:ObjectProperty ;
     owl:inverseOf mgr:hasSpeaker .
 
 mgr:hasSpeaker a owl:ObjectProperty ;
-    rdfs:label "a pour conférencier"@fr, "has speaker"@en ;
+    rdfs:label "a pour orateur"@fr, "has speaker"@en ;
     rdfs:comment "Relates a talk to the person who is speaking in it."@en ,
     "Relie une conférence à la personne qui y intervient."@fr ;
     rdfs:domain mgr:Talk ;
